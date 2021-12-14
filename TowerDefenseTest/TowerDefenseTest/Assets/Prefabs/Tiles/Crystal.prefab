@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   factory: {fileID: 11400000, guid: d247902a105baee45a59ba0346299ec8, type: 2}
+  homeTile: {fileID: 0}
+  isWalkable: 1
 --- !u!1 &5131326409093527201
 GameObject:
   m_ObjectHideFlags: 0

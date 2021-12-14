@@ -8,6 +8,8 @@ public class TileContentType : MonoBehaviour
 	#region Fields
 	public TileType type;
 	public TileFactory factory;
+	public Tile homeTile;
+	public bool isWalkable;
 	#endregion
 
 	#region Unity methods

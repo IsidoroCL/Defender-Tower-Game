@@ -130,6 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   factory: {fileID: 0}
+  homeTile: {fileID: 0}
+  isWalkable: 0
 --- !u!114 &5501926297890410640
 MonoBehaviour:
   m_ObjectHideFlags: 0

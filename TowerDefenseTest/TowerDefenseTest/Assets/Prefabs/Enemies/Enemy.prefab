@@ -127,6 +127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6543223a6b7742a4aa93816cf8a24e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  nextTile: {fileID: 0}
+  state: {fileID: 11400000, guid: f5dc3ba9090f9d24c84e2c6e3af4aa38, type: 2}
+  currentTile: {fileID: 0}
 --- !u!58 &1511615700519373175
 CircleCollider2D:
   m_ObjectHideFlags: 0

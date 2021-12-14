@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TileFactory", menuName = "TileFactory")]
+[CreateAssetMenu(fileName = "TileFactory", menuName = "Factory/TileFactory")]
 public class TileFactory : GameObjectFactory
 {
 
@@ -21,6 +21,9 @@ public class TileFactory : GameObjectFactory
 
 	[SerializeField]
 	TileContentType crystal;
+
+	[SerializeField]
+	TileContentType spawn;
 	#endregion
 
 	#region Unity methods
@@ -51,6 +54,8 @@ public class TileFactory : GameObjectFactory
 				return Get(laserTurret);
 			case TileType.Crystal:
 				return Get(crystal);
+			case TileType.SpawnPoint:
+				return Get(spawn);
 		}
 		return null;
     }

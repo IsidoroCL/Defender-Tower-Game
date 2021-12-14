@@ -128,3 +128,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   factory: {fileID: 0}
+  homeTile: {fileID: 0}
+  isWalkable: 1

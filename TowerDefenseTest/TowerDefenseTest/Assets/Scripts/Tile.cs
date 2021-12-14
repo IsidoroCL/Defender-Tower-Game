@@ -10,6 +10,7 @@ public class Tile : MonoBehaviour
 	public int y;
 	
 	private TileContentType content;
+    public GameObject searchingSymbol;
 
     public TileContentType Content
     {
@@ -19,15 +20,14 @@ public class Tile : MonoBehaviour
             if (content != null) content.Recycle();
             content = value;
             content.transform.localPosition = new Vector3(transform.position.x, transform.position.y, -1);
+            content.homeTile = this;
         }
     }
+
+    public Tile searchFrom;
     #endregion
 
     #region Unity methods
-    private void Awake()
-    {
-        
-    }
     #endregion
 
     #region Private methods
@@ -35,6 +35,14 @@ public class Tile : MonoBehaviour
     #endregion
 
     #region Public / Protected methods
+    public void Searching()
+    {
+        searchingSymbol.SetActive(true);
+    }
 
+    public void NoSearching()
+    {
+        searchingSymbol.SetActive(false);
+    }
     #endregion
 }
