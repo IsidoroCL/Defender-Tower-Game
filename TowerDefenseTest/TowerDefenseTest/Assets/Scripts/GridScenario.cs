@@ -85,5 +85,16 @@ public class GridScenario : MonoBehaviour
 			tile.Content = tileFactory.GetTile(TileType.Plain);
 		}
     }
+
+	public void ClearAllsearchFrom()
+	{
+		for (int y = 0; y < size.y; y++)
+		{
+			for (int x = 0; x < size.x; x++)
+			{
+				map[x, y].searchFrom = null;
+			}
+		}
+	}
 	#endregion
 }

@@ -7,7 +7,6 @@ public class SearchPathIA : Action
 {
     #region Fields
     private Queue<Tile> searchingQueue = new Queue<Tile>();
-    private List<Tile> tilesSearched = new List<Tile>();
     private Tile searchingTile;
     #endregion
 
@@ -18,41 +17,45 @@ public class SearchPathIA : Action
     #region Private methods
     private void BFSSearch(Enemy enemy)
     {
+        Game.ClearTilesSearch();
+        searchingQueue.Clear();
         Tile origin = enemy.currentTile;
-        searchingQueue.Enqueue(origin);
+        HashSet<Tile> tilesSearched = new HashSet<Tile>();
         tilesSearched.Clear();
+        searchingQueue.Enqueue(origin);
+        tilesSearched.Add(origin);
+
+        origin.searchFrom = null;
+
         while (searchingQueue.Count > 0)
         {
             searchingTile = searchingQueue.Dequeue();
-            tilesSearched.Add(searchingTile);
             if (searchingTile.Content.type == TileType.Crystal)
             {
                 Debug.Log("Crystal found");
-                enemy.path = CreatePath(searchingTile);
                 break;
             }
-            else
+
+            foreach(Tile neighbor in Game.GetNeighbor(searchingTile))
             {
-                List<Tile> neighbors = Game.GetNeighbor(searchingTile);
-                foreach(Tile neighbor in neighbors)
+                if (neighbor.Content.isWalkable &&
+                    !tilesSearched.Contains(neighbor))
                 {
-                    if (neighbor.Content.isWalkable &&
-                        !searchingQueue.Contains(neighbor) &&
-                        !tilesSearched.Contains(neighbor))
-                    {
-                        searchingQueue.Enqueue(neighbor);
-                        neighbor.searchFrom = searchingTile;
-                    }
+                    tilesSearched.Add(neighbor);
+                    searchingQueue.Enqueue(neighbor);
+                    neighbor.searchFrom = searchingTile;
                 }
             }
+
         }
+        enemy.path = CreatePath(searchingTile);
     }
 
     public Stack<Tile> CreatePath(Tile destination)
     {
         Stack<Tile> path = new Stack<Tile>();
-        path.Push(destination);
-        Tile previousTile = destination.searchFrom;
+
+        Tile previousTile = destination;
         while (previousTile != null)
         {
             previousTile.Searching();
@@ -60,6 +63,7 @@ public class SearchPathIA : Action
             previousTile = previousTile.searchFrom;
         }
         Debug.Log("Paht found");
+
         return path;
     }
     #endregion

@@ -21,9 +21,8 @@ public class PathIsClear : Decision
     #region Public / Protected methods
     public override bool Evaluate(Enemy enemy)
     {
-       return true;
-       if (enemy.nextTile.Content.type == TileType.Plain ||
-            enemy.nextTile.Content.type == TileType.Crystal)
+       if (enemy.nextTile == null) return true;
+       if (enemy.nextTile.Content.isWalkable)
         {
             return true;
         }

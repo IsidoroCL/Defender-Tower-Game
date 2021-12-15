@@ -14,14 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - type: 0
-    number: 2
+    number: 20
     frequency: 1
-    cooldown: 0
-  - type: 1
-    number: 5
-    frequency: 2
-    cooldown: 0
-  - type: 2
-    number: 5
-    frequency: 0.5
     cooldown: 0

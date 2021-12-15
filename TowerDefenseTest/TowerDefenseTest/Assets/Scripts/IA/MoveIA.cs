@@ -7,7 +7,7 @@ public class MoveIA : Action
 {
 
     #region Fields
-    Tile nextTile;
+
     #endregion
 
     #region Unity methods
@@ -17,22 +17,7 @@ public class MoveIA : Action
     #region Private methods
     private void Move(Enemy enemy)
     {
-        /*
-        if (nextTile == null &&
-            enemy.path.Count > 0)
-        {
-            nextTile = enemy.path.Pop();
-        }
-        else
-        {
-            enemy.transform.localPosition = Vector3.LerpUnclamped(enemy.currentTile.transform.position, nextTile.transform.position, Time.deltaTime);
-        }
-        if (enemy.transform.localPosition == nextTile.transform.position &&
-            enemy.path.Count > 0)
-        {
-            nextTile = enemy.path.Pop();
-        }*/
-
+        enemy.MoveEnemy();
     }
     #endregion
 

@@ -109,28 +109,17 @@ public class Game : MonoBehaviour
         int x = tile.x;
         int y = tile.y;
         List<Tile> neighbors = new List<Tile>();
-        for (int i = 0; i < 2; i++)
-        {
-            if (x + i < 0 ||
-                    x + i >= sizeGrid.x)
-            {
-                continue;
-            }
-            for (int j = 0; j < 2; j++)
-            {
-                if (y + j < 0 ||
-                    y + j >= sizeGrid.y)
-                {
-                    continue;
-                }
-                if (y == 0 && x == 0)
-                {
-                    continue;
-                }
-                neighbors.Add(instance.scenario.map[x + i, y + j]);                
-            }
-        }
+        if (x - 1 > 0) neighbors.Add(instance.scenario.map[x - 1, y]);
+        if (x + 1 < sizeGrid.x -1) neighbors.Add(instance.scenario.map[x + 1, y]);
+        if (y - 1 > 0) neighbors.Add(instance.scenario.map[x, y - 1]);
+        if (y + 1 < sizeGrid.y -1) neighbors.Add(instance.scenario.map[x, y + 1]);
+        
         return neighbors;
+    }
+
+    public static void ClearTilesSearch()
+    {
+        instance.scenario.ClearAllsearchFrom();
     }
     public static void End()
     {
