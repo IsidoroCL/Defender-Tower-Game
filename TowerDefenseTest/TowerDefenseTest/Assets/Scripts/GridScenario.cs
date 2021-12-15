@@ -6,8 +6,7 @@ public class GridScenario : MonoBehaviour
 {
 
 	#region Fields
-	[SerializeField]
-	Vector2Int size;
+	public Vector2Int size;
     [SerializeField]
     GameObject tilePrefab;
 
@@ -51,7 +50,7 @@ public class GridScenario : MonoBehaviour
     #endregion
 
     #region Public / Protected methods
-    public void Init(Vector2Int size, int mountains, int crystal, int spawns)
+    public void Init(Vector2Int size, int mountains, int forests, int crystal, int spawns)
     {
 		this.size = size;
 		map = new Tile[size.x, size.y];
@@ -70,6 +69,7 @@ public class GridScenario : MonoBehaviour
 			}
 		}
 		RandomScenario(mountains, TileType.Mountain);
+		RandomScenario(forests, TileType.Forest);
 		RandomScenario(crystal, TileType.Crystal);
 		spawnPoints = RandomScenario(spawns, TileType.SpawnPoint);
 	}

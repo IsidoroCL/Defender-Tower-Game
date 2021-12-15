@@ -71,6 +71,7 @@ public class SearchPathIA : Action
     #region Public / Protected methods
     public override void Act(Enemy enemy)
     {
+        enemy.nextTile = null;
         BFSSearch(enemy);
     }
     #endregion

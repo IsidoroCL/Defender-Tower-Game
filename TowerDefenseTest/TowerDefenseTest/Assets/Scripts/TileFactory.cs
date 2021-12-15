@@ -14,6 +14,9 @@ public class TileFactory : GameObjectFactory
 	TileContentType mountain;
 
 	[SerializeField]
+	TileContentType forest;
+
+	[SerializeField]
 	TileContentType cannonTurret;
 
 	[SerializeField]
@@ -48,6 +51,8 @@ public class TileFactory : GameObjectFactory
 				return Get(plain);
 			case TileType.Mountain:
 				return Get(mountain);
+			case TileType.Forest:
+				return Get(forest);
 			case TileType.CannonTurret:
 				return Get(cannonTurret);
 			case TileType.LaserTurret:

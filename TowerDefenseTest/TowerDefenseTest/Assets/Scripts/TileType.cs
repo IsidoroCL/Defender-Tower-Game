@@ -1,4 +1,4 @@
 public enum TileType
 {
-    Plain, Mountain, CannonTurret, LaserTurret, Crystal, SpawnPoint
+    Plain, Mountain, Forest, CannonTurret, LaserTurret, Crystal, SpawnPoint
 }

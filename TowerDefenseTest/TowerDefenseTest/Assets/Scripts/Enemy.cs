@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 
     #region Fields
     public float speed = 5;
-    float Health { get; set; }
+    public float Health { get; set; }
     private float progress;
     private EnemyFactory factory;
     public Stack<Tile> path = new Stack<Tile>();
@@ -33,20 +33,15 @@ public class Enemy : MonoBehaviour
             factory.Reclaim(this);
         }
         state.GameUpdate(this);
-        /*if (transform.position == nextTile.transform.position)
-        {
-            currentTile = nextTile;
-            nextTile = path.Pop();
-        }
-        if (nextTile == null)
-        {
-            Game.GameOver();
-        }
-        else
-        {
-            transform.localPosition = Vector3.LerpUnclamped(currentTile.transform.position, nextTile.transform.position, Time.deltaTime);
-        }*/
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            collision.gameObject.SetActive(false);
+            Health -= 10;
+        }
     }
     #endregion
 
@@ -69,12 +64,27 @@ public class Enemy : MonoBehaviour
         {
             nextTile = path.Pop();
         }
-        progress += Time.deltaTime * speed;
+        if (currentTile.Content.type == TileType.Forest)
+        {
+            progress += Time.deltaTime * (speed / 2);
+        }
+        else
+        {
+            progress += Time.deltaTime * speed;
+        }
+        
         while (progress >= 1f)
         {
             progress -= 1f;
             currentTile = nextTile;
-            nextTile = path.Pop();
+            if (currentTile.Content.type == TileType.Crystal)
+            {
+                Game.GameOver();
+            }
+            else
+            {
+                nextTile = path.Pop();
+            }
         }
         transform.localPosition =
             Vector3.LerpUnclamped(currentTile.transform.position, nextTile.transform.position, progress);

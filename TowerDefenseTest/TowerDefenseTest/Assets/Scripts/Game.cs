@@ -11,6 +11,8 @@ public class Game : MonoBehaviour
     private GameConfig config;
     [SerializeField]
     private EnemyFactory factory;
+    [SerializeField]
+    private CameraControl camera;
     private static Game instance;
     private EnemyWave enemies;
     private static Vector2Int sizeGrid;
@@ -35,7 +37,8 @@ public class Game : MonoBehaviour
     private void Start()
     {
         sizeGrid = config.sizeGrid;
-        scenario.Init(sizeGrid, config.numberOfMountains, config.numberOfCrystals, config.numberOfSpawns);
+        scenario.Init(sizeGrid, config.numberOfMountains, config.numberOfForests, config.numberOfCrystals, config.numberOfSpawns);
+        camera.Init(sizeGrid.x);
         enemies = config.enemies;
         enemies.CurrentGame = this;
         enemies.Init();

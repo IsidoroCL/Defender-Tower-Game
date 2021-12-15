@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1611353978615b4590a5f7b9437e1ac, type: 3}
   m_Name: Scenario01
   m_EditorClassIdentifier: 
-  sizeGrid: {x: 15, y: 15}
-  numberOfMountains: 10
+  sizeGrid: {x: 20, y: 20}
+  numberOfMountains: 25
+  numberOfForests: 30
   numberOfCrystals: 2
   numberOfSpawns: 6
   enemies: {fileID: 11400000, guid: 68d1ec7614a7a0e4e9d224ba9b13ca1a, type: 2}

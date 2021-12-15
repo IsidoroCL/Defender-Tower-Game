@@ -54,7 +54,7 @@ public class Turret : MonoBehaviour
         lastShoot += Time.deltaTime;
     }
 
-    protected void SearchTarget()
+    protected virtual void SearchTarget()
     {
         Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, range, 1 << 6);
         if (targets.Length > 0)

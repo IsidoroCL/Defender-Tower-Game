@@ -9,6 +9,7 @@ public class GameConfig : ScriptableObject
 	#region Fields
 	public Vector2Int sizeGrid;
 	public int numberOfMountains;
+	public int numberOfForests;
 	public int numberOfCrystals;
 	public int numberOfSpawns;
 	public EnemyWave enemies;
