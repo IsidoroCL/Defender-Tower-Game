@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   health: 10
-  prefab: {fileID: 1930556791974290785, guid: eb953b3ec9e48de429b5d59ee406fe77, type: 3}
+  prefab: {fileID: 1930556791974290785, guid: 7cf70c24e453a7c4f9badfdf924f39dc, type: 3}

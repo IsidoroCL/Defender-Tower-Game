@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +6,11 @@ public class GridScenario : MonoBehaviour
 
 	#region Fields
 	public Vector2Int size;
-    [SerializeField]
-    GameObject tilePrefab;
+	public Tile[,] map;
+	public List<Tile> spawnPoints;
 
-    public Tile[,] map;
-	public List<Tile> spawnPoints; 
-
+	[SerializeField]
+    GameObject tilePrefab; 
 	[SerializeField]
 	TileFactory tileFactory;
     #endregion
@@ -30,10 +28,13 @@ public class GridScenario : MonoBehaviour
 		int seedY = 0;
 		for(int i = 0; i < number; i++)
         {
-			if (type == TileType.Crystal) seedX = Random.Range(size.x / 2, size.x);
-			else if (type != TileType.SpawnPoint) seedX = Random.Range(0, size.x);
+			if (type == TileType.Crystal)
+				seedX = Random.Range(size.x / 2, size.x);
+			else if (type != TileType.SpawnPoint) 
+				seedX = Random.Range(0, size.x);
 			seedY = Random.Range(0, size.y);
-			if (map[seedX, seedY].Content.type == TileType.Plain)
+			if (map[seedX, seedY].Content.type == TileType.Plain &&
+				!CrystalOrSpawnNear(map[seedX, seedY]))
             {
 				ToggleContent(map[seedX, seedY], type);
 				tileChanges.Add(map[seedX, seedY]);
@@ -46,6 +47,19 @@ public class GridScenario : MonoBehaviour
 		return tileChanges;
 	}
 
+	private bool CrystalOrSpawnNear(Tile tile)
+    {
+		foreach(Tile neighbor in Game.GetNeighbor(tile))
+        {
+			if (neighbor.Content.type == TileType.Crystal ||
+				neighbor.Content.type == TileType.SpawnPoint)
+            {
+				return true;
+            }
+        }
+
+		return false;
+    }
 	
     #endregion
 
@@ -76,7 +90,8 @@ public class GridScenario : MonoBehaviour
 
     public void ToggleContent(Tile tile, TileType type)
     {
-		if (tile.Content.type == TileType.Plain)
+		if (tile.Content.type == TileType.Plain &&
+			!CrystalOrSpawnNear(tile))
         {
 			tile.Content = tileFactory.GetTile(type);
         }

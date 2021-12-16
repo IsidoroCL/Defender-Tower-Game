@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretLaser : Turret
@@ -46,7 +44,7 @@ public class TurretLaser : Turret
     protected override void Shoot(float angle, Vector2 direction)
     {
         laser.enabled = true;
-        laser.SetPosition(1, target.transform.localPosition + Vector3.back);
+        laser.SetPosition(1, target.transform.localPosition + Vector3.back *3);
         target.Health -= damage;
     }
     #endregion

@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyWave", menuName = "EnemyWave")]
 public class EnemyWave : ScriptableObject
 {
-	[System.Serializable]
+    #region Auxiliar Class
+    [System.Serializable]
 	class Wave
 	{
 		public EnemyType type;
@@ -14,8 +13,9 @@ public class EnemyWave : ScriptableObject
 		public float frequency;
 		public float cooldown;
 	}
-	#region Fields
-	[SerializeField]
+    #endregion
+    #region Fields
+    [SerializeField]
 	Wave[] waves;
 	private float timeProgress;
 	private int currentWave;

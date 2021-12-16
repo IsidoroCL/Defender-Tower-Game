@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,16 +7,13 @@ public class Enemy : MonoBehaviour
     #region Fields
     public float speed = 5;
     public float Health { get; set; }
-    private float progress;
-    private EnemyFactory factory;
     public Stack<Tile> path = new Stack<Tile>();
     public Tile nextTile;
-    private Game game;
-    [SerializeField]
     public StateIA state;
-
     public Tile currentTile;
 
+    private float progress;
+    private EnemyFactory factory;
     #endregion
 
     #region Unity methods
@@ -83,7 +79,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                nextTile = path.Pop();
+                if (path.Count > 0) nextTile = path.Pop();
             }
         }
         transform.localPosition =

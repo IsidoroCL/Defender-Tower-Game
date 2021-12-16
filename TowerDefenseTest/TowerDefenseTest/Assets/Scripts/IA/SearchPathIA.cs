@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,7 +57,7 @@ public class SearchPathIA : Action
         Tile previousTile = destination;
         while (previousTile != null)
         {
-            previousTile.Searching();
+            previousTile.HasPath();
             path.Push(previousTile);
             previousTile = previousTile.searchFrom;
         }

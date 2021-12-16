@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
@@ -8,9 +6,9 @@ public class Tile : MonoBehaviour
 	#region Fields
 	public int x;
 	public int y;
-	
-	private TileContentType content;
-    public GameObject searchingSymbol;
+    public Tile searchFrom;
+    public GameObject pathSymbol;
+    private TileContentType content;
 
     public TileContentType Content
     {
@@ -23,8 +21,6 @@ public class Tile : MonoBehaviour
             content.homeTile = this;
         }
     }
-
-    public Tile searchFrom;
     #endregion
 
     #region Unity methods
@@ -35,14 +31,14 @@ public class Tile : MonoBehaviour
     #endregion
 
     #region Public / Protected methods
-    public void Searching()
+    public void HasPath()
     {
-        searchingSymbol.SetActive(true);
+        pathSymbol.SetActive(true);
     }
 
-    public void NoSearching()
+    public void NoPath()
     {
-        searchingSymbol.SetActive(false);
+        pathSymbol.SetActive(false);
     }
     #endregion
 }

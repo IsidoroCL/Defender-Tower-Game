@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
 
     #region Fields
-    public float maxZoom = 5;
-    public float minZoom = 20;
-    public float sensitivity = 1;
-    public float zoomSpeed = 30;
-    public float movSpeed = 50;
+    [SerializeField]
+    float maxZoom = 5;
+    [SerializeField]
+    float minZoom = 20;
+    [SerializeField]
+    float sensitivity = 1;
+    [SerializeField]
+    float zoomSpeed = 30;
+    [SerializeField]
+    float movSpeed = 50;
     float targetZoom;
-    float limit;
-
     #endregion
 
     #region Unity methods
@@ -55,7 +56,6 @@ public class CameraControl : MonoBehaviour
     #region Public / Protected methods
     public void Init(int size)
     {
-        limit = size / 2f;
         Camera.main.transform.position = new Vector3((size / 2f) - 0.5f, (size / 2f) - 0.5f, -10);
         Camera.main.orthographicSize = targetZoom = size / 2f;
         maxZoom = size / 6f;

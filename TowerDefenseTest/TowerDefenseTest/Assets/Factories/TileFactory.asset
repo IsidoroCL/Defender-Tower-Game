@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3bb76ba09149642ae6cec94df387fe, type: 3}
+  m_Name: TileFactory
+  m_EditorClassIdentifier: 
+  plain: {fileID: 8613836746141627741, guid: ae59c95c62703c54b9ba5e21b38fb7b9, type: 3}
+  mountain: {fileID: 6850631736455265406, guid: cb742377e8d787f40b244c79775854ef, type: 3}
+  forest: {fileID: 8613836746141627741, guid: fabfe1a1e2a83844f85de98ff6601666, type: 3}
+  cannonTurret: {fileID: 6447063679231017471, guid: ca84187d7846ec84f97ca5873d708eb0, type: 3}
+  laserTurret: {fileID: 6447063679231017471, guid: ebe5c7d6b0e0cf74982f7745ab0a04ea, type: 3}
+  crystal: {fileID: 4158389445875623296, guid: 423750ca8c0826840a603c866a7e9461, type: 3}
+  spawn: {fileID: 4478378520841521052, guid: d500442ef43fd5e438984fcd32b7a421, type: 3}

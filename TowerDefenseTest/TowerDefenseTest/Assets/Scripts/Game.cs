@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
@@ -13,6 +13,12 @@ public class Game : MonoBehaviour
     private EnemyFactory factory;
     [SerializeField]
     private CameraControl camera;
+    [SerializeField]
+    private GameObject textWin;
+    [SerializeField]
+    private GameObject textLost;
+    [SerializeField]
+    private GameObject textReplay;
     private static Game instance;
     private EnemyWave enemies;
     private static Vector2Int sizeGrid;
@@ -25,7 +31,6 @@ public class Game : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
@@ -36,6 +41,10 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
+        textWin.SetActive(false);
+        textLost.SetActive(false);
+        textReplay.SetActive(false);
         sizeGrid = config.sizeGrid;
         scenario.Init(sizeGrid, config.numberOfMountains, config.numberOfForests, config.numberOfCrystals, config.numberOfSpawns);
         camera.Init(sizeGrid.x);
@@ -58,7 +67,12 @@ public class Game : MonoBehaviour
             }
             
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         if (!isGameEnd) enemies.Progress();
+        else CheckEnemies();
     }
     #endregion
 
@@ -82,6 +96,17 @@ public class Game : MonoBehaviour
             scenario.ToggleContent(objectTouch.GetComponent<Tile>(), TileType.CannonTurret);
         }
     }
+
+    private void CheckEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if ( enemies.Length < 1)
+        {
+            textWin.SetActive(true);
+            textReplay.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
     #endregion
 
     #region Public / Protected methods
@@ -101,10 +126,19 @@ public class Game : MonoBehaviour
     public void CreateEnemy(EnemyType type)
     {
         Enemy enemy = factory.GetEnemy(type);
-        int randomIndex = Random.Range(0, scenario.spawnPoints.Count);
-        Vector3 spawnPosition = scenario.spawnPoints[randomIndex].transform.position;
-        enemy.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, -2);
-        enemy.currentTile = scenario.spawnPoints[randomIndex];
+
+        //I addded this code because I have a rare error sometimes where spawnPoint is null
+        if (scenario.spawnPoints.Count > 0)
+        {
+            int randomIndex = Random.Range(0, scenario.spawnPoints.Count);
+            Vector3 spawnPosition = scenario.spawnPoints[randomIndex].transform.position;
+            enemy.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, -2);
+            enemy.currentTile = scenario.spawnPoints[randomIndex];
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public static List<Tile> GetNeighbor(Tile tile)
@@ -112,10 +146,10 @@ public class Game : MonoBehaviour
         int x = tile.x;
         int y = tile.y;
         List<Tile> neighbors = new List<Tile>();
-        if (x - 1 > 0) neighbors.Add(instance.scenario.map[x - 1, y]);
-        if (x + 1 < sizeGrid.x -1) neighbors.Add(instance.scenario.map[x + 1, y]);
-        if (y - 1 > 0) neighbors.Add(instance.scenario.map[x, y - 1]);
-        if (y + 1 < sizeGrid.y -1) neighbors.Add(instance.scenario.map[x, y + 1]);
+        if (x - 1 >= 0) neighbors.Add(instance.scenario.map[x - 1, y]);
+        if (x + 1 < sizeGrid.x) neighbors.Add(instance.scenario.map[x + 1, y]);
+        if (y - 1 >= 0) neighbors.Add(instance.scenario.map[x, y - 1]);
+        if (y + 1 < sizeGrid.y) neighbors.Add(instance.scenario.map[x, y + 1]);
         
         return neighbors;
     }
@@ -126,14 +160,15 @@ public class Game : MonoBehaviour
     }
     public static void End()
     {
-        Debug.Log("You WIN");
         isGameEnd = true;
     }
 
     public static void GameOver()
     {
-        Debug.Log("You LOST");
+        instance.textLost.SetActive(true);
+        instance.textReplay.SetActive(true);
         isGameEnd = true;
+        Time.timeScale = 0;
     }
     #endregion
 }

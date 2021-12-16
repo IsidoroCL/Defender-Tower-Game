@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "StateIA", menuName = "IA/StateIA")]
 public class StateIA : ScriptableObject
 {
-	[System.Serializable]
+    #region Auxiliar class
+    [System.Serializable]
 	public class Transition
 	{
 		public Decision decision;
 		public StateIA trueState;
 		public StateIA falseState;
 	}
+    #endregion
 
-	#region Fields
-	[SerializeField]
+    #region Fields
+    [SerializeField]
 	Action[] actions;
 	[SerializeField]
 	Transition[] transitions;
