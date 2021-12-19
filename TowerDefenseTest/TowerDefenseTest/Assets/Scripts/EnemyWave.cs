@@ -5,58 +5,57 @@ public class EnemyWave : ScriptableObject
 {
     #region Auxiliar Class
     [System.Serializable]
-	class Wave
-	{
-		public EnemyType type;
-		public int number;
-		[Range(0.5f, 5f)]
-		public float frequency;
-		public float cooldown;
-	}
+    class Wave
+    {
+        public EnemyType type;
+        public int numberOfEnemies;
+        [Range(0.5f, 5f)]
+        public float frequencyBetweenEnemies;
+    }
     #endregion
     #region Fields
     [SerializeField]
-	Wave[] waves;
-	private float timeProgress;
-	private int currentWave;
-	private int numberEnemiesSpawned;
+    Wave[] waves;
+    private float timeProgress;
+    private int currentWave;
+    private int numberEnemiesSpawned;
 
-	public Game CurrentGame { get; set; }
-	#endregion
+    public Game CurrentGame { get; set; }
+    #endregion
 
-	#region Unity methods
+    #region Unity methods
 
-	#endregion
+    #endregion
 
-	#region Private methods
+    #region Private methods
 
-	#endregion
-	
-	#region Public / Protected methods
-	public void Init()
+    #endregion
+
+    #region Public / Protected methods
+    public void Initialize()
     {
-		currentWave = 0;
-		timeProgress = 0;
+        currentWave = 0;
+        timeProgress = 0;
     }
 
-	public void Progress()
+    public void Progress()
     {
-		timeProgress += Time.deltaTime;
-		if (timeProgress >= waves[currentWave].frequency)
+        timeProgress += Time.deltaTime;
+        if (timeProgress >= waves[currentWave].frequencyBetweenEnemies)
         {
-			timeProgress -= waves[currentWave].frequency;
-			CurrentGame.CreateEnemy(waves[currentWave].type);
-			numberEnemiesSpawned++;
-			if (numberEnemiesSpawned >= waves[currentWave].number)
+            timeProgress -= waves[currentWave].frequencyBetweenEnemies;
+            CurrentGame.CreateEnemy(waves[currentWave].type);
+            numberEnemiesSpawned++;
+            if (numberEnemiesSpawned >= waves[currentWave].numberOfEnemies)
             {
-				currentWave++;
-				numberEnemiesSpawned = 0;
-				if (currentWave >= waves.Length)
+                currentWave++;
+                numberEnemiesSpawned = 0;
+                if (currentWave >= waves.Length)
                 {
-					Game.End();
+                    Game.End();
                 }
             }
-		}
+        }
     }
-	#endregion
+    #endregion
 }

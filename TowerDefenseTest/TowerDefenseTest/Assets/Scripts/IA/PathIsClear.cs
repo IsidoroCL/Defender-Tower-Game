@@ -19,12 +19,12 @@ public class PathIsClear : Decision
     #region Public / Protected methods
     public override bool Evaluate(Enemy enemy)
     {
-       if (enemy.nextTile == null) return true;
-       if (enemy.nextTile.Content.isWalkable)
+        if (enemy.nextTile == null) return true;
+        if (enemy.nextTile.Content.isWalkable)
         {
             return true;
         }
-       else
+        else
         {
             return false;
         }

@@ -4,23 +4,23 @@ using UnityEngine;
 public class EnemyConfig : ScriptableObject
 {
 
-	#region Fields
-	[Range(1,10)]
-	public float speed;
-	[Range(10,100)]
-	public int health;
-	public Enemy prefab;
-	#endregion
+    #region Fields
+    [Range(1, 10)]
+    public float speed;
+    [Range(10, 100)]
+    public int health;
+    public Enemy prefab;
+    #endregion
 
-	#region Unity methods
+    #region Unity methods
 
-	#endregion
+    #endregion
 
-	#region Private methods
+    #region Private methods
 
-	#endregion
-	
-	#region Public / Protected methods
+    #endregion
 
-	#endregion
+    #region Public / Protected methods
+
+    #endregion
 }

@@ -4,15 +4,15 @@ using UnityEngine;
 public class GridScenario : MonoBehaviour
 {
 
-	#region Fields
-	public Vector2Int size;
-	public Tile[,] map;
-	public List<Tile> spawnPoints;
+    #region Fields
+    public Vector2Int scenarioSize;
+    public Tile[,] scenarioTiles;
+    public List<Tile> spawnPoints;
 
-	[SerializeField]
-    GameObject tilePrefab; 
-	[SerializeField]
-	TileFactory tileFactory;
+    [SerializeField]
+    GameObject tilePrefab;
+    [SerializeField]
+    TileFactory tileFactory;
     #endregion
 
     #region Unity methods
@@ -21,95 +21,123 @@ public class GridScenario : MonoBehaviour
     #endregion
 
     #region Private methods
-    private List<Tile> RandomScenario(int number, TileType type)
+    private List<Tile> GenerateRandomTiles(GameConfig configuration)
     {
-		List<Tile> tileChanges = new List<Tile>(); 
-		int seedX = 0;
-		int seedY = 0;
-		for(int i = 0; i < number; i++)
+        List<Tile> spawnTiles = new List<Tile>();
+        int numberOfTilesToChange = configuration.numberOfMountains +
+            configuration.numberOfForests +
+            configuration.numberOfCrystals +
+            configuration.numberOfSpawns;
+        TileType type = TileType.Plain;
+        for (int i = 0; i < numberOfTilesToChange; i++)
         {
-			if (type == TileType.Crystal)
-				seedX = Random.Range(size.x / 2, size.x);
-			else if (type != TileType.SpawnPoint) 
-				seedX = Random.Range(0, size.x);
-			seedY = Random.Range(0, size.y);
-			if (map[seedX, seedY].Content.type == TileType.Plain &&
-				!CrystalOrSpawnNear(map[seedX, seedY]))
+            int seedX = Random.Range(0, scenarioSize.x);
+            int seedY = Random.Range(0, scenarioSize.y);
+            if (i < configuration.numberOfMountains)
             {
-				ToggleContent(map[seedX, seedY], type);
-				tileChanges.Add(map[seedX, seedY]);
-			}
-			else
-            {
-				RandomScenario(1, type);
+                type = TileType.Mountain;
             }
-		}
-		return tileChanges;
-	}
-
-	private bool CrystalOrSpawnNear(Tile tile)
-    {
-		foreach(Tile neighbor in Game.GetNeighbor(tile))
-        {
-			if (neighbor.Content.type == TileType.Crystal ||
-				neighbor.Content.type == TileType.SpawnPoint)
+            else if (i >= configuration.numberOfMountains &&
+                i < (configuration.numberOfMountains + configuration.numberOfForests))
             {
-				return true;
+                type = TileType.Forest;
+            }
+            else if (i >= (configuration.numberOfMountains + configuration.numberOfForests) &&
+                i < (configuration.numberOfMountains + configuration.numberOfForests + configuration.numberOfCrystals))
+            {
+                type = TileType.Crystal;
+                seedX = Random.Range(scenarioSize.x / 2, scenarioSize.x);
+            }
+            else if (i >= (configuration.numberOfMountains + configuration.numberOfForests + configuration.numberOfCrystals))
+            {
+                type = TileType.SpawnPoint;
+                seedX = 0;
+            }
+            int numberOfTimesTry = 0;
+            while (scenarioTiles[seedX, seedY].Content.type != TileType.Plain &&
+                numberOfTimesTry < scenarioSize.y - 1)
+            {
+                seedY = Random.Range(0, scenarioSize.y);
+                numberOfTimesTry++;
+            }
+            scenarioTiles[seedX, seedY].Content = tileFactory.GetTile(type);
+            if (type == TileType.SpawnPoint)
+            {
+                spawnTiles.Add(scenarioTiles[seedX, seedY]);
+            }
+        }
+        return spawnTiles;
+    }
+
+    private bool IsCrystalOrSpawnNear(Tile tile)
+    {
+        foreach (Tile neighbor in Game.GetNeighbor(tile))
+        {
+            if (neighbor.Content.type == TileType.Crystal ||
+                neighbor.Content.type == TileType.SpawnPoint)
+            {
+                return true;
             }
         }
 
-		return false;
+        return false;
     }
-	
+
     #endregion
 
     #region Public / Protected methods
-    public void Init(Vector2Int size, int mountains, int forests, int crystal, int spawns)
+    public void Initialize(GameConfig configuration)
     {
-		this.size = size;
-		map = new Tile[size.x, size.y];
-		for (int y = 0; y < size.y; y++)
-		{
-			for (int x = 0; x < size.x; x++)
-			{
-				GameObject tile = (GameObject)Instantiate(tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
-				tile.name = "Tile_" + x + "_" + y;
-				tile.GetComponent<Tile>().x = x;
-				tile.GetComponent<Tile>().y = y;
-				tile.GetComponent<Tile>().Content = tileFactory.GetTile(TileType.Plain);
-				tile.transform.SetParent(this.transform);
-				tile.isStatic = true;
-				map[x, y] = tile.GetComponent<Tile>();
-			}
-		}
-		RandomScenario(mountains, TileType.Mountain);
-		RandomScenario(forests, TileType.Forest);
-		RandomScenario(crystal, TileType.Crystal);
-		spawnPoints = RandomScenario(spawns, TileType.SpawnPoint);
-	}
+        this.scenarioSize = configuration.sizeGrid;
+        scenarioTiles = new Tile[scenarioSize.x, scenarioSize.y];
+        for (int y = 0; y < scenarioSize.y; y++)
+        {
+            for (int x = 0; x < scenarioSize.x; x++)
+            {
+                GameObject tile = (GameObject)Instantiate(tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
+                tile.GetComponent<Tile>().Initialize(x, y, tileFactory.GetTile(TileType.Plain));
+                tile.transform.SetParent(this.transform);
+                scenarioTiles[x, y] = tile.GetComponent<Tile>();
+            }
+        }
+        spawnPoints = GenerateRandomTiles(configuration);
+    }
 
     public void ToggleContent(Tile tile, TileType type)
     {
-		if (tile.Content.type == TileType.Plain &&
-			!CrystalOrSpawnNear(tile))
+        if (tile.Content.type == TileType.Plain &&
+            !IsCrystalOrSpawnNear(tile))
         {
-			tile.Content = tileFactory.GetTile(type);
+            tile.Content = tileFactory.GetTile(type);
         }
-		else if (tile.Content.type == type)
+        else if (tile.Content.type == type)
         {
-			tile.Content = tileFactory.GetTile(TileType.Plain);
-		}
+            tile.Content = tileFactory.GetTile(TileType.Plain);
+        }
     }
 
-	public void ClearAllsearchFrom()
-	{
-		for (int y = 0; y < size.y; y++)
-		{
-			for (int x = 0; x < size.x; x++)
-			{
-				map[x, y].searchFrom = null;
-			}
-		}
-	}
-	#endregion
+    public List<Tile> GetNeighbor(Tile tile)
+    {
+        int x = tile.x;
+        int y = tile.y;
+        List<Tile> neighbors = new List<Tile>();
+        if (x - 1 >= 0) neighbors.Add(scenarioTiles[x - 1, y]);
+        if (x + 1 < scenarioSize.x) neighbors.Add(scenarioTiles[x + 1, y]);
+        if (y - 1 >= 0) neighbors.Add(scenarioTiles[x, y - 1]);
+        if (y + 1 < scenarioSize.y) neighbors.Add(scenarioTiles[x, y + 1]);
+
+        return neighbors;
+    }
+
+    public void ClearTilesForNextPathFinding()
+    {
+        for (int y = 0; y < scenarioSize.y; y++)
+        {
+            for (int x = 0; x < scenarioSize.x; x++)
+            {
+                scenarioTiles[x, y].parentNode = null;
+            }
+        }
+    }
+    #endregion
 }

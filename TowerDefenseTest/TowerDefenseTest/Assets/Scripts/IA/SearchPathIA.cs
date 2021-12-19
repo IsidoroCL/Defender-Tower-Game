@@ -16,16 +16,19 @@ public class SearchPathIA : Action
     #region Private methods
     private void BFSSearch(Enemy enemy)
     {
-        Game.ClearTilesSearch();
+        Game.ClearTilesForNextPathFinding();
         searchingQueue.Clear();
         Tile origin = enemy.currentTile;
-        HashSet<Tile> tilesSearched = new HashSet<Tile>();
-        tilesSearched.Clear();
+
+        HashSet<Tile> tilesAlreadySearched = new HashSet<Tile>();
+        tilesAlreadySearched.Clear();
+
         searchingQueue.Enqueue(origin);
-        tilesSearched.Add(origin);
+        tilesAlreadySearched.Add(origin);
 
-        origin.searchFrom = null;
+        origin.parentNode = null;
 
+        //The queue is filled with the neighbor of the 
         while (searchingQueue.Count > 0)
         {
             searchingTile = searchingQueue.Dequeue();
@@ -35,14 +38,14 @@ public class SearchPathIA : Action
                 break;
             }
 
-            foreach(Tile neighbor in Game.GetNeighbor(searchingTile))
+            foreach (Tile neighbor in Game.GetNeighbor(searchingTile))
             {
                 if (neighbor.Content.isWalkable &&
-                    !tilesSearched.Contains(neighbor))
+                    !tilesAlreadySearched.Contains(neighbor))
                 {
-                    tilesSearched.Add(neighbor);
+                    tilesAlreadySearched.Add(neighbor);
                     searchingQueue.Enqueue(neighbor);
-                    neighbor.searchFrom = searchingTile;
+                    neighbor.parentNode = searchingTile;
                 }
             }
 
@@ -59,9 +62,8 @@ public class SearchPathIA : Action
         {
             previousTile.HasPath();
             path.Push(previousTile);
-            previousTile = previousTile.searchFrom;
+            previousTile = previousTile.parentNode;
         }
-        Debug.Log("Paht found");
 
         return path;
     }
@@ -71,6 +73,7 @@ public class SearchPathIA : Action
     public override void Act(Enemy enemy)
     {
         enemy.nextTile = null;
+        enemy.CleanPath();
         BFSSearch(enemy);
     }
     #endregion

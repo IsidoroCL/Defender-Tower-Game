@@ -4,7 +4,7 @@ public class DisableOnTime : MonoBehaviour
 {
 
     #region Fields
-    private float timeSinceActive;
+    private float timeSinceObjectIsActive;
     [SerializeField]
     float limitTime;
     #endregion
@@ -12,17 +12,17 @@ public class DisableOnTime : MonoBehaviour
     #region Unity methods
     private void Update()
     {
-        timeSinceActive += Time.deltaTime;
-        if (timeSinceActive > limitTime)
+        timeSinceObjectIsActive += Time.deltaTime;
+        if (timeSinceObjectIsActive > limitTime)
         {
-            timeSinceActive = 0;
+            timeSinceObjectIsActive = 0;
             gameObject.SetActive(false);
         }
     }
 
     private void OnEnable()
     {
-        timeSinceActive = 0;
+        timeSinceObjectIsActive = 0;
     }
     #endregion
 

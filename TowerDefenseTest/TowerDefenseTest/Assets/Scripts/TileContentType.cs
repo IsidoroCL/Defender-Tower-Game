@@ -3,25 +3,25 @@ using UnityEngine;
 public class TileContentType : MonoBehaviour
 {
 
-	#region Fields
-	public TileType type;
-	public TileFactory factory;
-	public Tile homeTile;
-	public bool isWalkable;
-	#endregion
+    #region Fields
+    public TileType type;
+    public TileFactory factory;
+    public Tile tileContainer;
+    public bool isWalkable;
+    #endregion
 
-	#region Unity methods
+    #region Unity methods
 
-	#endregion
+    #endregion
 
-	#region Private methods
+    #region Private methods
 
-	#endregion
-	
-	#region Public / Protected methods
-	public void Recycle()
+    #endregion
+
+    #region Public / Protected methods
+    public void Recycle()
     {
-		factory.Recycle(this);
+        factory.Recycle(this);
     }
-	#endregion
+    #endregion
 }

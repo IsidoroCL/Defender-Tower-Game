@@ -3,10 +3,10 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
 
-	#region Fields
-	public int x;
-	public int y;
-    public Tile searchFrom;
+    #region Fields
+    public int x;
+    public int y;
+    public Tile parentNode;
     public GameObject pathSymbol;
     private TileContentType content;
 
@@ -18,7 +18,7 @@ public class Tile : MonoBehaviour
             if (content != null) content.Recycle();
             content = value;
             content.transform.localPosition = new Vector3(transform.position.x, transform.position.y, -1);
-            content.homeTile = this;
+            content.tileContainer = this;
         }
     }
     #endregion
@@ -31,6 +31,15 @@ public class Tile : MonoBehaviour
     #endregion
 
     #region Public / Protected methods
+    public void Initialize(int x, int y, TileContentType type)
+    {
+        gameObject.name = "Tile_" + x + "_" + y;
+        gameObject.isStatic = true;
+        this.x = x;
+        this.y = y;
+        Content = type;
+    }
+
     public void HasPath()
     {
         pathSymbol.SetActive(true);

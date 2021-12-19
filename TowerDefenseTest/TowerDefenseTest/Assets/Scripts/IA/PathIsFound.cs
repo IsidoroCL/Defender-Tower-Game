@@ -27,7 +27,7 @@ public class PathIsFound : Decision
         {
             return true;
         }
-        
+
     }
     #endregion
 

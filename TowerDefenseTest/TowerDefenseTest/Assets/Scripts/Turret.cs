@@ -3,11 +3,11 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
 
-	#region Fields
-	protected Enemy target;
+    #region Fields
+    protected Enemy target;
 
-	[SerializeField, Range(1, 10)]
-	protected float range;
+    [SerializeField, Range(1, 10)]
+    protected float range;
     [SerializeField]
     protected float cooldown;
     [SerializeField]
@@ -37,11 +37,14 @@ public class Turret : MonoBehaviour
     {
         if (TargetInRange())
         {
-            Vector3 dir = target.transform.position - head.transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            //Calculate the angle between the turret and the target to get the direction of the bullet
+            //Then, move the head to the enemy
+            //With this sprites, I don't activate the head, it is desactivate
+            Vector3 differencePosition = target.transform.position - head.transform.position;
+            float angle = Mathf.Atan2(differencePosition.y, differencePosition.x) * Mathf.Rad2Deg;
             head.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            float distance = dir.magnitude;
-            Vector2 direction = dir / distance;
+            float distance = differencePosition.magnitude;
+            Vector2 direction = differencePosition / distance;
             direction.Normalize();
             Shoot(angle, direction);
         }
@@ -58,7 +61,6 @@ public class Turret : MonoBehaviour
         if (targets.Length > 0)
         {
             target = targets[0].GetComponent<Enemy>();
-            Debug.Log("Target obtained in " + gameObject.name);
         }
     }
     protected bool TargetInRange()
@@ -67,9 +69,7 @@ public class Turret : MonoBehaviour
         {
             return false;
         }
-        Vector3 a = transform.localPosition;
-        Vector3 b = target.transform.position;
-        if (Vector3.Distance(a, b) > range)
+        if (Vector3.Distance(transform.localPosition, target.transform.position) > range)
         {
             target = null;
             return false;
@@ -78,7 +78,7 @@ public class Turret : MonoBehaviour
     }
     protected virtual void Shoot(float angle, Vector2 direction)
     {
-        
+
     }
     #endregion
 }

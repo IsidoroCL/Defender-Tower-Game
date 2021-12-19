@@ -12,20 +12,22 @@ public class Enemy : MonoBehaviour
     public StateIA state;
     public Tile currentTile;
 
-    private float progress;
+    private float moveProgress;
     private EnemyFactory factory;
     #endregion
 
     #region Unity methods
     private void Awake()
     {
-        progress = 0;
+        moveProgress = 0;
     }
 
     private void Update()
     {
         if (Health < 0)
         {
+            CleanPath();
+            currentTile.NoPath();
             factory.Reclaim(this);
         }
         state.GameUpdate(this);
@@ -46,7 +48,7 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Public / Protected methods
-    public void Config(float speed, float health, EnemyFactory factory)
+    public void Configuration(float speed, float health, EnemyFactory factory)
     {
         this.speed = speed;
         Health = health;
@@ -62,16 +64,17 @@ public class Enemy : MonoBehaviour
         }
         if (currentTile.Content.type == TileType.Forest)
         {
-            progress += Time.deltaTime * (speed / 2);
+            moveProgress += Time.deltaTime * (speed / 2);
         }
         else
         {
-            progress += Time.deltaTime * speed;
+            moveProgress += Time.deltaTime * speed;
         }
-        
-        while (progress >= 1f)
+
+        while (moveProgress >= 1f)
         {
-            progress -= 1f;
+            moveProgress -= 1f;
+            currentTile.NoPath();
             currentTile = nextTile;
             if (currentTile.Content.type == TileType.Crystal)
             {
@@ -83,9 +86,17 @@ public class Enemy : MonoBehaviour
             }
         }
         transform.localPosition =
-            Vector3.LerpUnclamped(currentTile.transform.position, nextTile.transform.position, progress);
+            Vector3.LerpUnclamped(currentTile.transform.position, nextTile.transform.position, moveProgress);
     }
 
-    
+    public void CleanPath()
+    {
+        while (path.Count > 0)
+        {
+            path.Pop().NoPath();
+        }
+    }
+
+
     #endregion
 }

@@ -20,13 +20,13 @@ public class CameraControl : MonoBehaviour
     #region Unity methods
     private void LateUpdate()
     {
-        Zoom();
-        Pan();        
+        ZoomWithMouse();
+        PanWithMouse();
     }
     #endregion
 
     #region Private methods
-    private void Zoom()
+    private void ZoomWithMouse()
     {
         targetZoom -= Input.mouseScrollDelta.y * sensitivity;
         targetZoom = Mathf.Clamp(targetZoom, maxZoom, minZoom);
@@ -34,7 +34,7 @@ public class CameraControl : MonoBehaviour
         Camera.main.orthographicSize = newSize;
     }
 
-    private void Pan()
+    private void PanWithMouse()
     {
         if (Input.GetMouseButton(1))
         {
@@ -54,7 +54,7 @@ public class CameraControl : MonoBehaviour
     #endregion
 
     #region Public / Protected methods
-    public void Init(int size)
+    public void Initialize(int size)
     {
         Camera.main.transform.position = new Vector3((size / 2f) - 0.5f, (size / 2f) - 0.5f, -10);
         Camera.main.orthographicSize = targetZoom = size / 2f;
