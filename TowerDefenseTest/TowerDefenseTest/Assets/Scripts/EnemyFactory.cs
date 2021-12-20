@@ -31,7 +31,7 @@ public class EnemyFactory : GameObjectFactory
     {
         EnemyConfig configuration = GetConfiguration(type);
         Enemy enemy = CreateGameObjectInstance<Enemy>(configuration.prefab);
-        enemy.Configuration(configuration.speed, configuration.health, this);
+        enemy.Configuration(configuration, this);
         return enemy;
     }
 

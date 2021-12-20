@@ -21,9 +21,9 @@ public class TurretCannon : Turret
     #region Public / Protected methods
     protected override void Shoot(float angle, Vector2 direction)
     {
-        if (lastShoot > cooldown)
+        if (timeFromLastShoot > cooldown)
         {
-            lastShoot = 0;
+            timeFromLastShoot = 0;
             GameObject bullet = ObjectPool.GetPooledObject() as GameObject;
             bullet.transform.localPosition = new Vector3(transform.position.x, transform.position.y, -2);
             bullet.SetActive(true);

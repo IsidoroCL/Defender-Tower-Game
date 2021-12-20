@@ -12,7 +12,7 @@ public class Turret : MonoBehaviour
     protected float cooldown;
     [SerializeField]
     protected float bulletSpeed;
-    protected float lastShoot;
+    protected float timeFromLastShoot;
 
     [SerializeField]
     protected Transform head;
@@ -37,22 +37,16 @@ public class Turret : MonoBehaviour
     {
         if (TargetInRange())
         {
-            //Calculate the angle between the turret and the target to get the direction of the bullet
-            //Then, move the head to the enemy
-            //With this sprites, I don't activate the head, it is desactivate
-            Vector3 differencePosition = target.transform.position - head.transform.position;
-            float angle = Mathf.Atan2(differencePosition.y, differencePosition.x) * Mathf.Rad2Deg;
-            head.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            float distance = differencePosition.magnitude;
-            Vector2 direction = differencePosition / distance;
-            direction.Normalize();
+            float angle = CalculateAngleWithTarget(target.transform);
+            Vector2 direction = CalculateDirectionWithTarget(target.transform);
+            MoveHead(angle);
             Shoot(angle, direction);
         }
         else
         {
             SearchTarget();
         }
-        lastShoot += Time.deltaTime;
+        timeFromLastShoot += Time.deltaTime;
     }
 
     protected virtual void SearchTarget()
@@ -76,9 +70,30 @@ public class Turret : MonoBehaviour
         }
         return true;
     }
+
+    protected float CalculateAngleWithTarget(Transform target)
+    {
+        Vector3 differencePosition = target.position - transform.position;
+        float angle = Mathf.Atan2(differencePosition.y, differencePosition.x) * Mathf.Rad2Deg;
+        return angle;
+    }
+
+    protected Vector2 CalculateDirectionWithTarget(Transform target)
+    {
+        Vector3 differencePosition = target.position - transform.position;
+        float distance = differencePosition.magnitude;
+        Vector2 direction = differencePosition / distance;
+        direction.Normalize();
+        return direction;
+    }
     protected virtual void Shoot(float angle, Vector2 direction)
     {
 
+    }
+
+    protected void MoveHead(float angle)
+    {
+        head.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
     #endregion
 }

@@ -12,7 +12,7 @@ public class Game : MonoBehaviour
     [SerializeField]
     private EnemyFactory enemyFactory;
     [SerializeField]
-    private CameraControl camera;
+    private CameraControl cameraControl;
     [SerializeField]
     private GameObject textWin;
     [SerializeField]
@@ -47,7 +47,7 @@ public class Game : MonoBehaviour
         textReplay.SetActive(false);
         sizeGridScenario = gameConfiguration.sizeGrid;
         gridScenario.Initialize(gameConfiguration);
-        camera.Initialize(sizeGridScenario.x);
+        cameraControl.Initialize(sizeGridScenario.x);
         enemies = gameConfiguration.enemies;
         enemies.CurrentGame = this;
         enemies.Initialize();
@@ -55,73 +55,37 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                HandleTouchAlt();
-            }
-            else
-            {
-                HandleTouch();
-            }
-
-        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        if (!isGameEnd) enemies.Progress();
-        else CheckNumberOfEnemies();
+        if (!isGameEnd)
+            enemies.Progress();
+        else
+            CheckNumberOfEnemies();
     }
     #endregion
 
     #region Private methods
-    private void HandleTouch()
-    {
-        GameObject objectTouch = SelectedObjectByMouse();
-        if (objectTouch != null &&
-            objectTouch.GetComponent<Tile>())
-        {
-            gridScenario.ToggleContent(objectTouch.GetComponent<Tile>(), TileType.LaserTurret);
-        }
-    }
-
-    private void HandleTouchAlt()
-    {
-        GameObject objectTouch = SelectedObjectByMouse();
-        if (objectTouch != null &&
-            objectTouch.GetComponent<Tile>())
-        {
-            gridScenario.ToggleContent(objectTouch.GetComponent<Tile>(), TileType.CannonTurret);
-        }
-    }
 
     private void CheckNumberOfEnemies()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemies.Length < 1)
         {
-            textWin.SetActive(true);
-            textReplay.SetActive(true);
-            Time.timeScale = 0;
+            Win();
         }
+    }
+
+    private void Win()
+    {
+        textWin.SetActive(true);
+        textReplay.SetActive(true);
+        Time.timeScale = 0;
     }
     #endregion
 
     #region Public / Protected methods
-    public static GameObject SelectedObjectByMouse()
-    {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-        RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
-        if (hit.collider != null)
-        {
-            Debug.Log("Objeto pulsado: " + hit.collider.transform.gameObject.name);
-            return hit.collider.transform.gameObject;
-        }
-        return null;
-    }
 
     public void CreateEnemy(EnemyType type)
     {

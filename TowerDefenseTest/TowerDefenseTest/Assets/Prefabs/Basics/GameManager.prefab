@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3294029420868880800}
   - component: {fileID: 3294029420868880802}
   - component: {fileID: 3294029420868880803}
+  - component: {fileID: 7194395970601537325}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -44,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3817d7e47af974b95c7aec5286c975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenario: {fileID: 0}
-  config: {fileID: 11400000, guid: 83c1ad88e25ac064897a5916ede6743c, type: 2}
-  factory: {fileID: 11400000, guid: 259f01d019431dc46aee6c9cdd105b27, type: 2}
+  gridScenario: {fileID: 0}
+  gameConfiguration: {fileID: 11400000, guid: 83c1ad88e25ac064897a5916ede6743c, type: 2}
+  enemyFactory: {fileID: 11400000, guid: 259f01d019431dc46aee6c9cdd105b27, type: 2}
   camera: {fileID: 0}
   textWin: {fileID: 0}
   textLost: {fileID: 0}
@@ -65,3 +66,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToPool: {fileID: 5954410597456256726, guid: 7901f8e3162b72c43ad50905556e3f28, type: 3}
   amountToPool: 100
+--- !u!114 &7194395970601537325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3294029420868880801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05cc863941172864592049734f38de00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridScenario: {fileID: 0}

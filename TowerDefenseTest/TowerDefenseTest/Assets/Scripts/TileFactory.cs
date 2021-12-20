@@ -34,7 +34,7 @@ public class TileFactory : GameObjectFactory
     #region Private methods
     private TileContentType Get(TileContentType tile)
     {
-        TileContentType tileTemp = CreateGameObjectInstance<TileContentType>(tile);
+        TileContentType tileTemp = CreateGameObjectInstance(tile);
         tileTemp.factory = this;
         return tileTemp;
     }

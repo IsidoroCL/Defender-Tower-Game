@@ -347,10 +347,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 438387619}
     - target: {fileID: 3294029420868880802, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
-      propertyPath: scenario
-      value: 
-      objectReference: {fileID: 1009329133}
-    - target: {fileID: 3294029420868880802, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
       propertyPath: textLost
       value: 
       objectReference: {fileID: 351294018}
@@ -359,17 +355,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1145694618}
     - target: {fileID: 3294029420868880802, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
-      propertyPath: enemyFactory
-      value: 
-      objectReference: {fileID: 11400000, guid: 259f01d019431dc46aee6c9cdd105b27, type: 2}
-    - target: {fileID: 3294029420868880802, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
       propertyPath: gridScenario
       value: 
       objectReference: {fileID: 1009329133}
     - target: {fileID: 3294029420868880802, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
-      propertyPath: gameConfiguration
+      propertyPath: cameraControl
       value: 
-      objectReference: {fileID: 11400000, guid: 83c1ad88e25ac064897a5916ede6743c, type: 2}
+      objectReference: {fileID: 164894815}
+    - target: {fileID: 7194395970601537325, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
+      propertyPath: gridScenario
+      value: 
+      objectReference: {fileID: 1009329133}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
 --- !u!1001 &4451474332908241608

@@ -6,14 +6,15 @@ public class Enemy : MonoBehaviour
 
     #region Fields
     public float speed = 5;
-    public float Health { get; set; }
+    public StateIA state;
     public Stack<Tile> path = new Stack<Tile>();
     public Tile nextTile;
-    public StateIA state;
     public Tile currentTile;
 
     private float moveProgress;
     private EnemyFactory factory;
+
+    public float Health { get; set; }
     #endregion
 
     #region Unity methods
@@ -44,14 +45,27 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Private methods
-
+    private void ReachNextTile()
+    {
+        moveProgress -= 1f;
+        currentTile.NoPath();
+        currentTile = nextTile;
+        if (currentTile.Content.type == TileType.Crystal)
+        {
+            Game.GameOver();
+        }
+        else
+        {
+            if (path.Count > 0) nextTile = path.Pop();
+        }
+    }
     #endregion
 
     #region Public / Protected methods
-    public void Configuration(float speed, float health, EnemyFactory factory)
+    public void Configuration(EnemyConfig configuration, EnemyFactory factory)
     {
-        this.speed = speed;
-        Health = health;
+        this.speed = configuration.speed;
+        Health = configuration.health;
         this.factory = factory;
     }
 
@@ -70,20 +84,9 @@ public class Enemy : MonoBehaviour
         {
             moveProgress += Time.deltaTime * speed;
         }
-
         while (moveProgress >= 1f)
         {
-            moveProgress -= 1f;
-            currentTile.NoPath();
-            currentTile = nextTile;
-            if (currentTile.Content.type == TileType.Crystal)
-            {
-                Game.GameOver();
-            }
-            else
-            {
-                if (path.Count > 0) nextTile = path.Pop();
-            }
+            ReachNextTile();
         }
         transform.localPosition =
             Vector3.LerpUnclamped(currentTile.transform.position, nextTile.transform.position, moveProgress);

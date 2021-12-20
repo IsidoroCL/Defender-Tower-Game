@@ -6,6 +6,7 @@ public class SearchPathIA : Action
 {
     #region Fields
     private Queue<Tile> searchingQueue = new Queue<Tile>();
+    private HashSet<Tile> tilesAlreadySearched = new HashSet<Tile>();
     private Tile searchingTile;
     #endregion
 
@@ -14,46 +15,47 @@ public class SearchPathIA : Action
     #endregion
 
     #region Private methods
-    private void BFSSearch(Enemy enemy)
+    private void BFSearch(Enemy enemy)
     {
-        Game.ClearTilesForNextPathFinding();
-        searchingQueue.Clear();
+        ClearCollections();
         Tile origin = enemy.currentTile;
-
-        HashSet<Tile> tilesAlreadySearched = new HashSet<Tile>();
-        tilesAlreadySearched.Clear();
-
         searchingQueue.Enqueue(origin);
         tilesAlreadySearched.Add(origin);
-
         origin.parentNode = null;
 
-        //The queue is filled with the neighbor of the 
         while (searchingQueue.Count > 0)
         {
             searchingTile = searchingQueue.Dequeue();
             if (searchingTile.Content.type == TileType.Crystal)
             {
-                Debug.Log("Crystal found");
                 break;
             }
-
-            foreach (Tile neighbor in Game.GetNeighbor(searchingTile))
-            {
-                if (neighbor.Content.isWalkable &&
-                    !tilesAlreadySearched.Contains(neighbor))
-                {
-                    tilesAlreadySearched.Add(neighbor);
-                    searchingQueue.Enqueue(neighbor);
-                    neighbor.parentNode = searchingTile;
-                }
-            }
-
+            EnqueueNeighbors(Game.GetNeighbor(searchingTile));
         }
         enemy.path = CreatePath(searchingTile);
     }
 
-    public Stack<Tile> CreatePath(Tile destination)
+    private void ClearCollections()
+    {
+        Game.ClearTilesForNextPathFinding();
+        searchingQueue.Clear();
+        tilesAlreadySearched.Clear();
+    }
+    
+    private void EnqueueNeighbors(List<Tile> neighbors)
+    {
+        foreach (Tile neighbor in neighbors)
+        {
+            if (neighbor.Content.isWalkable &&
+                !tilesAlreadySearched.Contains(neighbor))
+            {
+                tilesAlreadySearched.Add(neighbor);
+                searchingQueue.Enqueue(neighbor);
+                neighbor.parentNode = searchingTile;
+            }
+        }
+    }
+    private Stack<Tile> CreatePath(Tile destination)
     {
         Stack<Tile> path = new Stack<Tile>();
 
@@ -74,7 +76,7 @@ public class SearchPathIA : Action
     {
         enemy.nextTile = null;
         enemy.CleanPath();
-        BFSSearch(enemy);
+        BFSearch(enemy);
     }
     #endregion
 }

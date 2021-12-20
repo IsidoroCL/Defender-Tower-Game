@@ -28,29 +28,17 @@ public class GridScenario : MonoBehaviour
             configuration.numberOfForests +
             configuration.numberOfCrystals +
             configuration.numberOfSpawns;
-        TileType type = TileType.Plain;
         for (int i = 0; i < numberOfTilesToChange; i++)
         {
             int seedX = Random.Range(0, scenarioSize.x);
             int seedY = Random.Range(0, scenarioSize.y);
-            if (i < configuration.numberOfMountains)
+            TileType type = GetTileType(i, configuration);
+            if (type == TileType.Crystal)
             {
-                type = TileType.Mountain;
-            }
-            else if (i >= configuration.numberOfMountains &&
-                i < (configuration.numberOfMountains + configuration.numberOfForests))
-            {
-                type = TileType.Forest;
-            }
-            else if (i >= (configuration.numberOfMountains + configuration.numberOfForests) &&
-                i < (configuration.numberOfMountains + configuration.numberOfForests + configuration.numberOfCrystals))
-            {
-                type = TileType.Crystal;
                 seedX = Random.Range(scenarioSize.x / 2, scenarioSize.x);
             }
-            else if (i >= (configuration.numberOfMountains + configuration.numberOfForests + configuration.numberOfCrystals))
+            else if (type == TileType.SpawnPoint)
             {
-                type = TileType.SpawnPoint;
                 seedX = 0;
             }
             int numberOfTimesTry = 0;
@@ -69,18 +57,27 @@ public class GridScenario : MonoBehaviour
         return spawnTiles;
     }
 
-    private bool IsCrystalOrSpawnNear(Tile tile)
+    private TileType GetTileType(int i, GameConfig configuration)
     {
-        foreach (Tile neighbor in Game.GetNeighbor(tile))
+        if (i < configuration.numberOfMountains)
         {
-            if (neighbor.Content.type == TileType.Crystal ||
-                neighbor.Content.type == TileType.SpawnPoint)
-            {
-                return true;
-            }
+            return TileType.Mountain;
         }
-
-        return false;
+        else if (i >= configuration.numberOfMountains &&
+            i < (configuration.numberOfMountains + configuration.numberOfForests))
+        {
+            return TileType.Forest;
+        }
+        else if (i >= (configuration.numberOfMountains + configuration.numberOfForests) &&
+            i < (configuration.numberOfMountains + configuration.numberOfForests + configuration.numberOfCrystals))
+        {
+            return TileType.Crystal;
+        }
+        else if (i >= (configuration.numberOfMountains + configuration.numberOfForests + configuration.numberOfCrystals))
+        {
+            return TileType.SpawnPoint;
+        }
+        return TileType.Plain;
     }
 
     #endregion
@@ -95,7 +92,7 @@ public class GridScenario : MonoBehaviour
             for (int x = 0; x < scenarioSize.x; x++)
             {
                 GameObject tile = (GameObject)Instantiate(tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
-                tile.GetComponent<Tile>().Initialize(x, y, tileFactory.GetTile(TileType.Plain));
+                tile.GetComponent<Tile>().Initialize(x, y, tileFactory.GetTile(TileType.Plain), tileFactory);
                 tile.transform.SetParent(this.transform);
                 scenarioTiles[x, y] = tile.GetComponent<Tile>();
             }
@@ -103,18 +100,7 @@ public class GridScenario : MonoBehaviour
         spawnPoints = GenerateRandomTiles(configuration);
     }
 
-    public void ToggleContent(Tile tile, TileType type)
-    {
-        if (tile.Content.type == TileType.Plain &&
-            !IsCrystalOrSpawnNear(tile))
-        {
-            tile.Content = tileFactory.GetTile(type);
-        }
-        else if (tile.Content.type == type)
-        {
-            tile.Content = tileFactory.GetTile(TileType.Plain);
-        }
-    }
+    
 
     public List<Tile> GetNeighbor(Tile tile)
     {

@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour
     public Tile parentNode;
     public GameObject pathSymbol;
     private TileContentType content;
+    private TileFactory tileFactory;
 
     public TileContentType Content
     {
@@ -27,17 +28,43 @@ public class Tile : MonoBehaviour
     #endregion
 
     #region Private methods
+    private bool IsCrystalOrSpawnNear()
+    {
+        foreach (Tile neighbor in Game.GetNeighbor(this))
+        {
+            if (neighbor.Content.type == TileType.Crystal ||
+                neighbor.Content.type == TileType.SpawnPoint)
+            {
+                return true;
+            }
+        }
 
+        return false;
+    }
     #endregion
 
     #region Public / Protected methods
-    public void Initialize(int x, int y, TileContentType type)
+    public void Initialize(int x, int y, TileContentType type, TileFactory factory)
     {
         gameObject.name = "Tile_" + x + "_" + y;
         gameObject.isStatic = true;
         this.x = x;
         this.y = y;
         Content = type;
+        tileFactory = factory;
+    }
+
+    public void ToggleContent(TileType type)
+    {
+        if (Content.type == TileType.Plain &&
+            !IsCrystalOrSpawnNear())
+        {
+            Content = tileFactory.GetTile(type);
+        }
+        else if (Content.type == type)
+        {
+            Content = tileFactory.GetTile(TileType.Plain);
+        }
     }
 
     public void HasPath()

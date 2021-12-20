@@ -41,13 +41,15 @@ public class CameraControl : MonoBehaviour
             if (Input.GetAxis("Mouse X") > 0)
             {
                 transform.position += new Vector3(-Input.GetAxisRaw("Mouse X") * Time.deltaTime * movSpeed,
-                                           -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * movSpeed, 0.0f);
+                                           -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * movSpeed,
+                                           0.0f);
             }
 
             else if (Input.GetAxis("Mouse X") < 0)
             {
                 transform.position += new Vector3(-Input.GetAxisRaw("Mouse X") * Time.deltaTime * movSpeed,
-                                           -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * movSpeed, 0.0f);
+                                           -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * movSpeed,
+                                           0.0f);
             }
         }
     }

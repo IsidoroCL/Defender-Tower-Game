@@ -17,12 +17,7 @@ public class TurretLaser : Turret
 
     private void Start()
     {
-        Vector3[] positions = new Vector3[2];
-        positions[0] = transform.position + Vector3.back;
-        positions[1] = transform.position;
-        laser.positionCount = positions.Length;
-        laser.SetPositions(positions);
-        laser.enabled = false;
+        InitializeLaser();
     }
     private void Update()
     {
@@ -31,7 +26,15 @@ public class TurretLaser : Turret
     #endregion
 
     #region Private methods
-
+    private void InitializeLaser()
+    {
+        Vector3[] positions = new Vector3[2];
+        positions[0] = transform.position + Vector3.back;
+        positions[1] = transform.position;
+        laser.positionCount = positions.Length;
+        laser.SetPositions(positions);
+        laser.enabled = false;
+    }
     #endregion
 
     #region Public / Protected methods
