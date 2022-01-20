@@ -4,10 +4,15 @@ public class TurretCannon : Turret
 {
 
     #region Fields
-
+    private ObjectPool pool;
     #endregion
 
     #region Unity methods
+    private void Start()
+    {
+        pool = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ObjectPool>();
+    }
+
     private void Update()
     {
         GameUpdate();
@@ -24,7 +29,7 @@ public class TurretCannon : Turret
         if (timeFromLastShoot > cooldown)
         {
             timeFromLastShoot = 0;
-            GameObject bullet = ObjectPool.GetPooledObject() as GameObject;
+            GameObject bullet = pool.GetPooledObject() as GameObject;
             bullet.transform.localPosition = new Vector3(transform.position.x, transform.position.y, -2);
             bullet.SetActive(true);
             bullet.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);

@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 
     #region Fields
     public float speed = 5;
+    public int money = 0;
     public StateIA state;
     public Stack<Tile> path = new Stack<Tile>();
     public Tile nextTile;
@@ -30,6 +31,7 @@ public class Enemy : MonoBehaviour
             CleanPath();
             currentTile.NoPath();
             factory.Reclaim(this);
+            Game.money += money;
         }
         state.GameUpdate(this);
     }

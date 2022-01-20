@@ -19,3 +19,5 @@ MonoBehaviour:
   laserTurret: {fileID: 6447063679231017471, guid: ebe5c7d6b0e0cf74982f7745ab0a04ea, type: 3}
   crystal: {fileID: 4158389445875623296, guid: 423750ca8c0826840a603c866a7e9461, type: 3}
   spawn: {fileID: 4478378520841521052, guid: d500442ef43fd5e438984fcd32b7a421, type: 3}
+  quarry: {fileID: 4158389445875623296, guid: 6b840a696218338489ca794baa2dc7b8, type: 3}
+  wall: {fileID: 8613836746141627741, guid: bda0342545a9a0b48b043e85e118249a, type: 3}

@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  nextTile: {fileID: 0}
+  money: 10
   state: {fileID: 11400000, guid: f5dc3ba9090f9d24c84e2c6e3af4aa38, type: 2}
+  nextTile: {fileID: 0}
   currentTile: {fileID: 0}
 --- !u!58 &1511615700519373175
 CircleCollider2D:

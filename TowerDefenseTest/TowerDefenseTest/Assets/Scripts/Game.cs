@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,11 +19,16 @@ public class Game : MonoBehaviour
     [SerializeField]
     private GameObject textLost;
     [SerializeField]
+    private TextMeshProUGUI textMoney;
+    [SerializeField]
     private GameObject textReplay;
     private static Game instance;
     private EnemyWave enemies;
     private static Vector2Int sizeGridScenario;
     private static bool isGameEnd;
+
+    public static int money;
+    public static TileType tileTypeSelected;
     #endregion
 
     #region Unity methods
@@ -37,6 +43,8 @@ public class Game : MonoBehaviour
             Destroy(this);
         }
         isGameEnd = false;
+
+        tileTypeSelected = TileType.CannonTurret;
     }
 
     private void Start()
@@ -48,6 +56,7 @@ public class Game : MonoBehaviour
         sizeGridScenario = gameConfiguration.sizeGrid;
         gridScenario.Initialize(gameConfiguration);
         cameraControl.Initialize(sizeGridScenario.x);
+        money = gameConfiguration.startMoney;
         enemies = gameConfiguration.enemies;
         enemies.CurrentGame = this;
         enemies.Initialize();
@@ -55,6 +64,7 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
+        textMoney.text = money.ToString();
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

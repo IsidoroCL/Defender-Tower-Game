@@ -25,6 +25,12 @@ public class TileFactory : GameObjectFactory
 
     [SerializeField]
     TileContentType spawn;
+
+    [SerializeField]
+    TileContentType quarry;
+
+    [SerializeField]
+    TileContentType wall;
     #endregion
 
     #region Unity methods
@@ -34,6 +40,12 @@ public class TileFactory : GameObjectFactory
     #region Private methods
     private TileContentType Get(TileContentType tile)
     {
+        Game.money -= tile.cost;
+        if (Game.money < 0)
+        {
+            Game.money += tile.cost;
+            return Get(plain);
+        }
         TileContentType tileTemp = CreateGameObjectInstance(tile);
         tileTemp.factory = this;
         return tileTemp;
@@ -59,6 +71,10 @@ public class TileFactory : GameObjectFactory
                 return Get(crystal);
             case TileType.SpawnPoint:
                 return Get(spawn);
+            case TileType.Quarry:
+                return Get(quarry);
+            case TileType.Wall:
+                return Get(wall);
         }
         return null;
     }

@@ -48,9 +48,10 @@ MonoBehaviour:
   gridScenario: {fileID: 0}
   gameConfiguration: {fileID: 11400000, guid: 83c1ad88e25ac064897a5916ede6743c, type: 2}
   enemyFactory: {fileID: 11400000, guid: 259f01d019431dc46aee6c9cdd105b27, type: 2}
-  camera: {fileID: 0}
+  cameraControl: {fileID: 0}
   textWin: {fileID: 0}
   textLost: {fileID: 0}
+  textMoney: {fileID: 0}
   textReplay: {fileID: 0}
 --- !u!114 &3294029420868880803
 MonoBehaviour:
@@ -78,4 +79,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cc863941172864592049734f38de00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridScenario: {fileID: 0}

@@ -213,7 +213,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   factory: {fileID: 0}
-  homeTile: {fileID: 0}
+  tileContainer: {fileID: 0}
+  cost: 50
   isWalkable: 0
 --- !u!114 &5501926297890410640
 MonoBehaviour:

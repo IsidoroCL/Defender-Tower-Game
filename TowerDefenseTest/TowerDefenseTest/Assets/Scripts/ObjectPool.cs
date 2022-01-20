@@ -4,7 +4,7 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     #region Fields
-    static List<GameObject> pooledObjects;
+    List<GameObject> pooledObjects;
     [SerializeField]
     GameObject objectToPool;
     [SerializeField]
@@ -24,7 +24,7 @@ public class ObjectPool : MonoBehaviour
     }
     #endregion
     #region Public Methods
-    public static GameObject GetPooledObject()
+    public GameObject GetPooledObject()
     {
         for (int i = 0; i < pooledObjects.Count; i++)
         {
@@ -33,7 +33,7 @@ public class ObjectPool : MonoBehaviour
         return null;
     }
 
-    public static void ReturnPooledObject(GameObject obj)
+    public void ReturnPooledObject(GameObject obj)
     {
         obj.SetActive(false);
     }

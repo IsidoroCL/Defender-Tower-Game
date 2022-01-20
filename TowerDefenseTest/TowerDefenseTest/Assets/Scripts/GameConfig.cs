@@ -11,6 +11,7 @@ public class GameConfig : ScriptableObject
 	public int numberOfCrystals;
 	public int numberOfSpawns;
 	public EnemyWave enemies;
+	public int startMoney;
 	#endregion
 
 	#region Unity methods
@@ -20,7 +21,7 @@ public class GameConfig : ScriptableObject
 	#region Private methods
 
 	#endregion
-	
+
 	#region Public / Protected methods
 
 	#endregion

@@ -226,6 +226,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2110418068 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2110418068, guid: aef2c13a20a9dd14b993a2d684de5054, type: 3}
+  m_PrefabInstance: {fileID: 5844033330206975788}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &425233866353842747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -339,10 +350,6 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 3294029420868880802, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
-      propertyPath: camera
-      value: 
-      objectReference: {fileID: 164894815}
-    - target: {fileID: 3294029420868880802, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
       propertyPath: textWin
       value: 
       objectReference: {fileID: 438387619}
@@ -350,6 +357,10 @@ PrefabInstance:
       propertyPath: textLost
       value: 
       objectReference: {fileID: 351294018}
+    - target: {fileID: 3294029420868880802, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
+      propertyPath: textMoney
+      value: 
+      objectReference: {fileID: 2110418068}
     - target: {fileID: 3294029420868880802, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
       propertyPath: textReplay
       value: 
@@ -362,10 +373,6 @@ PrefabInstance:
       propertyPath: cameraControl
       value: 
       objectReference: {fileID: 164894815}
-    - target: {fileID: 7194395970601537325, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
-      propertyPath: gridScenario
-      value: 
-      objectReference: {fileID: 1009329133}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24edda243911a1348a71e98f9f4dcc10, type: 3}
 --- !u!1001 &4451474332908241608
@@ -377,6 +384,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4451474332843696420, guid: 027671bd452b2e247a9aa505ea1dca0b, type: 3}
       propertyPath: m_Name
+      value: Scenario
+      objectReference: {fileID: 0}
+    - target: {fileID: 4451474332843696420, guid: 027671bd452b2e247a9aa505ea1dca0b, type: 3}
+      propertyPath: m_TagString
       value: Scenario
       objectReference: {fileID: 0}
     - target: {fileID: 4451474332843696422, guid: 027671bd452b2e247a9aa505ea1dca0b, type: 3}

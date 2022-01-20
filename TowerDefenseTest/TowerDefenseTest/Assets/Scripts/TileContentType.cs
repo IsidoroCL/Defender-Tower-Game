@@ -7,6 +7,7 @@ public class TileContentType : MonoBehaviour
     public TileType type;
     public TileFactory factory;
     public Tile tileContainer;
+    public int cost;
     public bool isWalkable;
     #endregion
 

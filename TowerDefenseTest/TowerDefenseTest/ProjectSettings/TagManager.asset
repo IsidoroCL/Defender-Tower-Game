@@ -7,6 +7,9 @@ TagManager:
   - Bullet
   - GameManager
   - Enemy
+  - Bonus
+  - UI
+  - Scenario
   layers:
   - Default
   - TransparentFX
