@@ -5,9 +5,14 @@ public class GridScenario : MonoBehaviour
 {
 
     #region Fields
+    [HideInInspector]
     public Vector2Int scenarioSize;
+    [HideInInspector]
     public Tile[,] scenarioTiles;
+    [HideInInspector]
     public List<Tile> spawnPoints;
+    [HideInInspector]
+    public static HashSet<Tile> castles;
 
     [SerializeField]
     GameObject tilePrefab;

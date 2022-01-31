@@ -4,7 +4,7 @@ public class BarControl : MonoBehaviour
 {
 
     #region Fields
-    private Enemy enemy;
+    private IHealth creature;
     private SpriteRenderer bar;
     private float totalHealth;
     #endregion
@@ -12,18 +12,18 @@ public class BarControl : MonoBehaviour
     #region Unity methods
     private void Awake()
     {
-        enemy = GetComponentInParent<Enemy>();
+        creature = GetComponentInParent<IHealth>();
         bar = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
-        totalHealth = enemy.Health;
+        totalHealth = creature.GetHealth();
     }
 
     private void Update()
     {
-        float relation = (float)enemy.Health / totalHealth;
+        float relation = (float)creature.GetHealth() / totalHealth;
         transform.localScale = new Vector3(relation, 0.1f, 1.0f);
     }
     #endregion

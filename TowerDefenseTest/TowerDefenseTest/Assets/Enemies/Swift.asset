@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2a319d8ee838a4da4e97ef348a07d2, type: 3}
   m_Name: Swift
   m_EditorClassIdentifier: 
-  speed: 4
-  health: 10
+  speed: 3
+  health: 5
+  attack: 5
+  money: 5
+  fly: 0
+  attackBuilding: 0
   prefab: {fileID: 1930556791974290785, guid: 7cf70c24e453a7c4f9badfdf924f39dc, type: 3}

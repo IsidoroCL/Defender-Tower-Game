@@ -52,6 +52,9 @@ MonoBehaviour:
   textWin: {fileID: 0}
   textLost: {fileID: 0}
   textMoney: {fileID: 0}
+  textTime: {fileID: 0}
+  textScore: {fileID: 0}
+  textRecord: {fileID: 0}
   textReplay: {fileID: 0}
 --- !u!114 &3294029420868880803
 MonoBehaviour:

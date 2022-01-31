@@ -48,7 +48,9 @@ MonoBehaviour:
   factory: {fileID: 0}
   tileContainer: {fileID: 0}
   cost: 0
+  influenceZone: 0
   isWalkable: 1
+  health: -1
 --- !u!1 &7784420582987194270
 GameObject:
   m_ObjectHideFlags: 0

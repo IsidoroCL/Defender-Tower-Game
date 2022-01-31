@@ -46,8 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 6
   factory: {fileID: 0}
-  homeTile: {fileID: 0}
+  tileContainer: {fileID: 0}
+  cost: 0
+  influenceZone: 0
   isWalkable: 1
+  health: -1
 --- !u!1 &6751160610870279175
 GameObject:
   m_ObjectHideFlags: 0

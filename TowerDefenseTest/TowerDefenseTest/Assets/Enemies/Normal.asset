@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   health: 20
+  attack: 5
+  money: 10
+  fly: 0
+  attackBuilding: 0
   prefab: {fileID: 1930556791974290785, guid: 582412ead1872d4479a216214413e2f0, type: 3}

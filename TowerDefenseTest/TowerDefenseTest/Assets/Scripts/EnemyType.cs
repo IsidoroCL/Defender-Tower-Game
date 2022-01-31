@@ -2,5 +2,9 @@ public enum EnemyType
 {
    Normal,
    Swift,
-   Armoured
+   Armoured,
+   Dragon,
+   FlyMonster,
+   DragonBlue,
+   Mushroom
 }

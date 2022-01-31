@@ -20,6 +20,7 @@ public class Tile : MonoBehaviour
             content = value;
             content.transform.localPosition = new Vector3(transform.position.x, transform.position.y, -1);
             content.tileContainer = this;
+            content.Initialize();
         }
     }
     #endregion
@@ -28,19 +29,7 @@ public class Tile : MonoBehaviour
     #endregion
 
     #region Private methods
-    private bool IsCrystalOrSpawnNear()
-    {
-        foreach (Tile neighbor in Game.GetNeighbor(this))
-        {
-            if (neighbor.Content.type == TileType.Crystal ||
-                neighbor.Content.type == TileType.SpawnPoint)
-            {
-                return true;
-            }
-        }
 
-        return false;
-    }
     #endregion
 
     #region Public / Protected methods
@@ -56,14 +45,9 @@ public class Tile : MonoBehaviour
 
     public void ToggleContent(TileType type)
     {
-        if (Content.type == TileType.Plain &&
-            !IsCrystalOrSpawnNear())
+        if (Content.IsBuildable)
         {
             Content = tileFactory.GetTile(type);
-        }
-        else if (Content.type == type)
-        {
-            Content = tileFactory.GetTile(TileType.Plain);
         }
     }
 
@@ -75,6 +59,20 @@ public class Tile : MonoBehaviour
     public void NoPath()
     {
         pathSymbol.SetActive(false);
+    }
+
+    public bool IsCrystalOrSpawnNear()
+    {
+        foreach (Tile neighbor in Game.GetNeighbor(this))
+        {
+            if (neighbor.Content.type == TileType.Crystal ||
+                neighbor.Content.type == TileType.SpawnPoint)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
     #endregion
 }

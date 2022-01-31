@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca8f1bc3875fd6040beb7a4a749ac342, type: 3}
+  m_Name: MoveToCastleState
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: f82dfe4470dbc8f4cb2d4fc3b9cbf0f1, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: eb170a597e3329d4ea66f5a36925b64b, type: 2}
+    trueState: {fileID: 11400000, guid: 3297baeb87d07c64589b8e288325c417, type: 2}
+    falseState: {fileID: 11400000, guid: f7f32ea57141d3c49abd00fb47b34b1b, type: 2}

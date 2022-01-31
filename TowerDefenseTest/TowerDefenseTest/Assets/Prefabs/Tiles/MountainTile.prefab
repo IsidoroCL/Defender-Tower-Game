@@ -128,5 +128,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   factory: {fileID: 0}
-  homeTile: {fileID: 0}
+  tileContainer: {fileID: 0}
+  cost: 0
+  influenceZone: 0
   isWalkable: 0
+  health: -1

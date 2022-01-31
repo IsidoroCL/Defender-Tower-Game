@@ -1,27 +1,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IHealth
 {
 
     #region Fields
-    public float speed = 5;
-    public int money = 0;
+    private float speed;
+    private int money;
+    private bool canFly;
+    private bool canAttackBuilding;
+
     public StateIA state;
     public Stack<Tile> path = new Stack<Tile>();
     public Tile nextTile;
     public Tile currentTile;
 
     private float moveProgress;
+    private float timeFromLastAttack;
     private EnemyFactory factory;
+    private SpriteRenderer[] sprites;
 
     public float Health { get; set; }
+    public int Attack { get; set; }
+    public bool CanFly { get { return canFly;} }
+    public bool CanAttackBuilding { get { return canAttackBuilding; } }
     #endregion
 
     #region Unity methods
     private void Awake()
     {
         moveProgress = 0;
+        sprites = GetComponentsInChildren<SpriteRenderer>();
     }
 
     private void Update()
@@ -34,6 +43,11 @@ public class Enemy : MonoBehaviour
             Game.money += money;
         }
         state.GameUpdate(this);
+        timeFromLastAttack += Time.deltaTime;
+        foreach (SpriteRenderer sprite in sprites)
+        {
+            sprite.sortingOrder = 100 - Mathf.FloorToInt(transform.position.y);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -68,6 +82,10 @@ public class Enemy : MonoBehaviour
     {
         this.speed = configuration.speed;
         Health = configuration.health;
+        money = configuration.money;
+        Attack = configuration.attack;
+        canFly = configuration.fly;
+        canAttackBuilding = configuration.attackBuilding;
         this.factory = factory;
     }
 
@@ -78,7 +96,8 @@ public class Enemy : MonoBehaviour
         {
             nextTile = path.Pop();
         }
-        if (currentTile.Content.type == TileType.Forest)
+        if (currentTile.Content.type == TileType.Forest &&
+            !CanFly)
         {
             moveProgress += Time.deltaTime * (speed / 2);
         }
@@ -99,6 +118,24 @@ public class Enemy : MonoBehaviour
         while (path.Count > 0)
         {
             path.Pop().NoPath();
+        }
+    }
+
+    public float GetHealth()
+    {
+        return Health;
+    }
+
+    public void AttackBuilding(Tile target)
+    {
+        if (timeFromLastAttack > 1)
+        {
+            timeFromLastAttack = 0;
+            target.Content.Health -= Attack;
+            if (target.Content.Health <= 0)
+            {
+                target.Content.DestroyContent();
+            }
         }
     }
 

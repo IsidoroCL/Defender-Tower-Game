@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4451474332843696421}
   m_Layer: 0
   m_Name: Scenario
-  m_TagString: Untagged
+  m_TagString: Scenario
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d2735244d076c459c26ecd60b809a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 0, y: 0}
-  tilePrefab: {fileID: 4279727759853262570, guid: 852a927c2f34a914994e674f2c4e861e, type: 3}
+  scenarioSize: {x: 0, y: 0}
   spawnPoints: []
+  tilePrefab: {fileID: 4279727759853262570, guid: 852a927c2f34a914994e674f2c4e861e, type: 3}
   tileFactory: {fileID: 11400000, guid: d247902a105baee45a59ba0346299ec8, type: 2}

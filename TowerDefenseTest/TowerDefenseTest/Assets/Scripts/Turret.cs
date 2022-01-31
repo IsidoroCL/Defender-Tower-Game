@@ -6,6 +6,8 @@ public class Turret : MonoBehaviour
     #region Fields
     protected Enemy target;
 
+    [SerializeField]
+    protected float health;
     [SerializeField, Range(1, 10)]
     protected float range;
     [SerializeField]
@@ -22,6 +24,11 @@ public class Turret : MonoBehaviour
     private void Update()
     {
         GameUpdate();
+        if (health < 0)
+        {
+            TileContentType tileContentType = GetComponent<TileContentType>();
+            tileContentType.GetComponent<Tile>().ToggleContent(tileContentType.type);
+        }
     }
 
     #endregion

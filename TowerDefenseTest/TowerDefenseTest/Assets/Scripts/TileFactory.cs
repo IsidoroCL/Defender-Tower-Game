@@ -44,7 +44,9 @@ public class TileFactory : GameObjectFactory
         if (Game.money < 0)
         {
             Game.money += tile.cost;
-            return Get(plain);
+            TileContentType tileNull = Get(plain);
+            tileNull.IsBuildable = true;
+            return tileNull;
         }
         TileContentType tileTemp = CreateGameObjectInstance(tile);
         tileTemp.factory = this;

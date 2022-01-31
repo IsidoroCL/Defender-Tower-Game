@@ -7,8 +7,12 @@ public class EnemyConfig : ScriptableObject
     #region Fields
     [Range(1, 10)]
     public float speed;
-    [Range(10, 100)]
+    [Range(5, 100)]
     public int health;
+    public int attack;
+    public int money;
+    public bool fly;
+    public bool attackBuilding;
     public Enemy prefab;
     #endregion
 

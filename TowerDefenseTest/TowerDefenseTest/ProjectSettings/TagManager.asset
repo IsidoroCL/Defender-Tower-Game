@@ -10,6 +10,7 @@ TagManager:
   - Bonus
   - UI
   - Scenario
+  - Building
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -21,14 +22,25 @@ public class Game : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textMoney;
     [SerializeField]
+    private TextMeshProUGUI textTime;
+    [SerializeField]
+    private TextMeshProUGUI textScore;
+    [SerializeField]
+    private TextMeshProUGUI textRecord;
+    [SerializeField]
     private GameObject textReplay;
-    private static Game instance;
     private EnemyWave enemies;
+
+    private static Game instance;
     private static Vector2Int sizeGridScenario;
     private static bool isGameEnd;
+    private static bool isSurvival;
+    private bool stopCheckNumberOfEnemies;
+    private static float timeOfSurvivalGame;
 
     public static int money;
     public static TileType tileTypeSelected;
+    public static HashSet<TileContentType> castles;
     #endregion
 
     #region Unity methods
@@ -40,50 +52,84 @@ public class Game : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         isGameEnd = false;
-
+        castles = new HashSet<TileContentType>();
         tileTypeSelected = TileType.CannonTurret;
+        stopCheckNumberOfEnemies = false;
     }
 
     private void Start()
     {
-        Time.timeScale = 1;
-        textWin.SetActive(false);
-        textLost.SetActive(false);
-        textReplay.SetActive(false);
-        sizeGridScenario = gameConfiguration.sizeGrid;
-        gridScenario.Initialize(gameConfiguration);
-        cameraControl.Initialize(sizeGridScenario.x);
-        money = gameConfiguration.startMoney;
-        enemies = gameConfiguration.enemies;
-        enemies.CurrentGame = this;
-        enemies.Initialize();
+        if (ConfigurationChoose.gameConfiguration != null)
+        {
+            gameConfiguration = ConfigurationChoose.gameConfiguration;
+        }
+        NewGame();
     }
 
     private void Update()
     {
         textMoney.text = money.ToString();
+        if (isSurvival)
+        {
+            timeOfSurvivalGame += Time.deltaTime;
+            textTime.text = Mathf.FloorToInt(timeOfSurvivalGame).ToString();
+        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("StartMenu", LoadSceneMode.Single);
+        }
         if (!isGameEnd)
             enemies.Progress();
-        else
+        else if (!stopCheckNumberOfEnemies)
             CheckNumberOfEnemies();
     }
     #endregion
 
     #region Private methods
 
+    private void NewGame()
+    {
+        Time.timeScale = 1;
+        textWin.SetActive(false);
+        textLost.SetActive(false);
+        textReplay.SetActive(false);
+        textScore.gameObject.SetActive(false);
+        textRecord.gameObject.SetActive(false);
+        sizeGridScenario = gameConfiguration.sizeGrid;
+        gridScenario.Initialize(gameConfiguration);
+        cameraControl.Initialize(sizeGridScenario.x);
+        money = gameConfiguration.startMoney;
+        isSurvival = gameConfiguration.survivalMode;
+        enemies = gameConfiguration.enemies;
+        enemies.CurrentGame = this;
+        enemies.Initialize();
+
+        if (isSurvival)
+        {
+            textTime.gameObject.SetActive(true);
+            timeOfSurvivalGame = 0;
+        }
+    }
+
     private void CheckNumberOfEnemies()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemies.Length < 1)
+        GameObject[] enemiesInGame = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemiesInGame.Length < 1 && !isSurvival)
         {
+            stopCheckNumberOfEnemies = true;
             Win();
+        }
+        else if (enemiesInGame.Length < 1 && isSurvival)
+        {
+            enemies.Initialize();
+            isGameEnd = false;
         }
     }
 
@@ -92,6 +138,43 @@ public class Game : MonoBehaviour
         textWin.SetActive(true);
         textReplay.SetActive(true);
         Time.timeScale = 0;
+        ConfigurationChoose.level++;
+        StartCoroutine(NextGame());
+    }
+
+    private void CheckRecord(int score)
+    {
+        int currentRecord;
+        string recordKey;
+        switch (sizeGridScenario.x)
+        {
+            case 10: //Small
+                recordKey = "RecordSmall";
+                break;
+            case 15: //Medium
+                recordKey = "RecordMedium";
+                break;
+            case 20: //Big
+                recordKey = "RecordBig";
+                break;
+            default:
+                recordKey = "RecordSmall";
+                break;
+        }
+        currentRecord = PlayerPrefs.GetInt(recordKey, 0);
+        if (score > currentRecord)
+        {
+            PlayerPrefs.SetInt(recordKey, score);
+        }
+        textRecord.gameObject.SetActive(true);
+        textRecord.text += PlayerPrefs.GetInt(recordKey, 0);
+    }
+
+    IEnumerator NextGame()
+    {
+        yield return new WaitForSecondsRealtime(3);
+        ConfigurationChoose.LoadNextScenario();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     #endregion
 
@@ -124,6 +207,14 @@ public class Game : MonoBehaviour
     {
         instance.gridScenario.ClearTilesForNextPathFinding();
     }
+    
+    public static void CheckCastles()
+    {
+        if (castles.Count < 1)
+        {
+            GameOver();
+        }
+    }
     public static void End()
     {
         isGameEnd = true;
@@ -135,6 +226,12 @@ public class Game : MonoBehaviour
         instance.textReplay.SetActive(true);
         isGameEnd = true;
         Time.timeScale = 0;
+        if (isSurvival)
+        {
+            instance.textScore.gameObject.SetActive(true);
+            instance.textScore.text += " " + Mathf.FloorToInt(timeOfSurvivalGame).ToString();
+            instance.CheckRecord(Mathf.FloorToInt(timeOfSurvivalGame));
+        }
     }
     #endregion
 }

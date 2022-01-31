@@ -20,7 +20,8 @@ public class PathIsClear : Decision
     public override bool Evaluate(Enemy enemy)
     {
         if (enemy.nextTile == null) return true;
-        if (enemy.nextTile.Content.isWalkable)
+        if (enemy.nextTile.Content.isWalkable
+            || enemy.CanFly)
         {
             return true;
         }

@@ -41,7 +41,11 @@ public class EnemyWave : ScriptableObject
     public void Progress()
     {
         timeProgress += Time.deltaTime;
-        if (timeProgress >= waves[currentWave].frequencyBetweenEnemies)
+        if (currentWave >= waves.Length)
+        {
+            Game.End();
+        }
+        else if (timeProgress >= waves[currentWave].frequencyBetweenEnemies)
         {
             timeProgress -= waves[currentWave].frequencyBetweenEnemies;
             CurrentGame.CreateEnemy(waves[currentWave].type);
@@ -50,10 +54,6 @@ public class EnemyWave : ScriptableObject
             {
                 currentWave++;
                 numberEnemiesSpawned = 0;
-                if (currentWave >= waves.Length)
-                {
-                    Game.End();
-                }
             }
         }
     }

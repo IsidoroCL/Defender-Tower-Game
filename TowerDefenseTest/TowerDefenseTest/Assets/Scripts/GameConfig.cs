@@ -12,6 +12,7 @@ public class GameConfig : ScriptableObject
 	public int numberOfSpawns;
 	public EnemyWave enemies;
 	public int startMoney;
+	public bool survivalMode;
 	#endregion
 
 	#region Unity methods

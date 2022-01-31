@@ -21,6 +21,10 @@ public class EnemyFactory : GameObjectFactory
             case EnemyType.Normal: return configs[0];
             case EnemyType.Swift: return configs[1];
             case EnemyType.Armoured: return configs[2];
+            case EnemyType.Dragon: return configs[3];
+            case EnemyType.FlyMonster: return configs[4];
+            case EnemyType.DragonBlue: return configs[5];
+            case EnemyType.Mushroom: return configs[6];
             default: return configs[0];
         }
     }

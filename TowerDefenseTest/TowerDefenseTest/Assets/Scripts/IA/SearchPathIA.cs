@@ -26,11 +26,21 @@ public class SearchPathIA : Action
         while (searchingQueue.Count > 0)
         {
             searchingTile = searchingQueue.Dequeue();
-            if (searchingTile.Content.type == TileType.Crystal)
+            if (enemy.CanAttackBuilding)
             {
-                break;
+                if (searchingTile.Content.Health > 0)
+                {
+                    break;
+                }
+            } 
+            else
+            {
+                if (searchingTile.Content.type == TileType.Crystal)
+                {
+                    break;
+                }
             }
-            EnqueueNeighbors(Game.GetNeighbor(searchingTile));
+            EnqueueNeighbors(Game.GetNeighbor(searchingTile), enemy);
         }
         enemy.path = CreatePath(searchingTile);
     }
@@ -42,11 +52,14 @@ public class SearchPathIA : Action
         tilesAlreadySearched.Clear();
     }
     
-    private void EnqueueNeighbors(List<Tile> neighbors)
+    private void EnqueueNeighbors(List<Tile> neighbors, Enemy enemy)
     {
         foreach (Tile neighbor in neighbors)
         {
-            if (neighbor.Content.isWalkable &&
+            if ((neighbor.Content.isWalkable || 
+                enemy.CanFly ||
+                (enemy.CanAttackBuilding && neighbor.Content.Health > 0)) 
+                &&
                 !tilesAlreadySearched.Contains(neighbor))
             {
                 tilesAlreadySearched.Add(neighbor);

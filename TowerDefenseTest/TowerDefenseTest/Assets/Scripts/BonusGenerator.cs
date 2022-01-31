@@ -32,7 +32,9 @@ public class BonusGenerator : MonoBehaviour
             timeProgress -= frequencyBetweenBonus;
             GameObject bonus = pool.GetPooledObject() as GameObject;
             Vector3 positionInScenario = GetRandomPositionNeighbor();
-            bonus.transform.position = new Vector3(positionInScenario.x, positionInScenario.y, -6);
+            bonus.transform.position = new Vector3(positionInScenario.x + Random.Range(-0.4f, 0.4f),
+                positionInScenario.y + Random.Range(-0.4f, 0.4f),
+                -7);
             bonus.SetActive(true);
         }
     }
