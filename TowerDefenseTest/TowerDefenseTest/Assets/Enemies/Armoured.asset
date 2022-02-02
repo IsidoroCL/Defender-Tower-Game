@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Armoured
   m_EditorClassIdentifier: 
   speed: 1
-  health: 50
+  health: 40
   attack: 10
   money: 20
   fly: 0

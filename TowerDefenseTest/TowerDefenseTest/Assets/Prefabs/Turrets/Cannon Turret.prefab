@@ -272,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5202796866107896795}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.379, z: 0}
+  m_LocalPosition: {x: 0, y: -0.379, z: -1}
   m_LocalScale: {x: 1, y: 0.099999994, z: 1}
   m_Children: []
   m_Father: {fileID: 6447063679231017470}
@@ -475,7 +475,7 @@ MonoBehaviour:
   type: 3
   factory: {fileID: 0}
   tileContainer: {fileID: 0}
-  cost: 70
+  cost: 100
   influenceZone: 2
   isWalkable: 0
   health: 30
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  range: 2
+  range: 4
   cooldown: 3
   bulletSpeed: 10
   head: {fileID: 6447063679146382330}

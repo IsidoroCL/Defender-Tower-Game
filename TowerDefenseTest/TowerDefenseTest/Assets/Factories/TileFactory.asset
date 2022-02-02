@@ -15,9 +15,10 @@ MonoBehaviour:
   plain: {fileID: 8613836746141627741, guid: ae59c95c62703c54b9ba5e21b38fb7b9, type: 3}
   mountain: {fileID: 6850631736455265406, guid: cb742377e8d787f40b244c79775854ef, type: 3}
   forest: {fileID: 8613836746141627741, guid: fabfe1a1e2a83844f85de98ff6601666, type: 3}
-  cannonTurret: {fileID: 6447063679231017471, guid: ca84187d7846ec84f97ca5873d708eb0, type: 3}
+  cannonTurret: {fileID: 6447063679231017471, guid: 8d3059f764177de4dbbfa20be4bc1779, type: 3}
   laserTurret: {fileID: 6447063679231017471, guid: ebe5c7d6b0e0cf74982f7745ab0a04ea, type: 3}
   crystal: {fileID: 4158389445875623296, guid: 423750ca8c0826840a603c866a7e9461, type: 3}
   spawn: {fileID: 4478378520841521052, guid: d500442ef43fd5e438984fcd32b7a421, type: 3}
   quarry: {fileID: 4158389445875623296, guid: 6b840a696218338489ca794baa2dc7b8, type: 3}
   wall: {fileID: 8613836746141627741, guid: bda0342545a9a0b48b043e85e118249a, type: 3}
+  woodenwall: {fileID: 8613836746141627741, guid: 1cb07c8d414813546abb2612d923c011, type: 3}

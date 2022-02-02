@@ -11,8 +11,6 @@ public class GridScenario : MonoBehaviour
     public Tile[,] scenarioTiles;
     [HideInInspector]
     public List<Tile> spawnPoints;
-    [HideInInspector]
-    public static HashSet<Tile> castles;
 
     [SerializeField]
     GameObject tilePrefab;

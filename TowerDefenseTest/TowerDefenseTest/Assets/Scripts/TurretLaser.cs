@@ -29,7 +29,7 @@ public class TurretLaser : Turret
     private void InitializeLaser()
     {
         Vector3[] positions = new Vector3[2];
-        positions[0] = transform.position + Vector3.back;
+        positions[0] = new Vector3(transform.position.x, transform.position.y + 0.42f, -1);
         positions[1] = transform.position;
         laser.positionCount = positions.Length;
         laser.SetPositions(positions);

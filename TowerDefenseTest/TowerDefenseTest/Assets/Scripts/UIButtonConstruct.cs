@@ -34,5 +34,10 @@ public class UIButtonConstruct : MonoBehaviour
     {
         Game.tileTypeSelected = TileType.Wall;
     }
+
+    public static void ClickedWoodenWall()
+    {
+        Game.tileTypeSelected = TileType.WoodenWall;
+    }
     #endregion
 }

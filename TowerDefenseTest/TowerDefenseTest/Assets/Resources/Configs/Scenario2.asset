@@ -17,6 +17,6 @@ MonoBehaviour:
   numberOfForests: 10
   numberOfCrystals: 1
   numberOfSpawns: 2
-  enemies: {fileID: 11400000, guid: 7a4ed83f090abfb49853fcb0f7102a0e, type: 2}
-  startMoney: 100
+  enemies: {fileID: 11400000, guid: 756c5783bf74b8d4483cfcbf65c96a3c, type: 2}
+  startMoney: 200
   survivalMode: 0

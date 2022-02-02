@@ -272,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5202796866107896795}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.379, z: 0}
+  m_LocalPosition: {x: 0, y: -0.379, z: -1}
   m_LocalScale: {x: 1, y: 0.099999994, z: 1}
   m_Children: []
   m_Father: {fileID: 6447063679231017470}
@@ -366,7 +366,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6447063679146382333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.426, z: -2}
+  m_LocalPosition: {x: 0, y: 0.42, z: -2}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 6447063679231017470}
@@ -493,11 +493,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  range: 4
+  range: 3
   cooldown: 0
   bulletSpeed: 0
   head: {fileID: 6447063679146382330}
-  damage: 0.01
+  damage: 0.02
 --- !u!120 &8662728890694892509
 LineRenderer:
   m_ObjectHideFlags: 0

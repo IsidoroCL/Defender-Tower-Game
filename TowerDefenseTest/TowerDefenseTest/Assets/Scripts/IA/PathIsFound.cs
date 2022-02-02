@@ -23,9 +23,20 @@ public class PathIsFound : Decision
         {
             return false;
         }
-        else
+        else if (enemy.CanAttackBuilding)
         {
             return true;
+        } 
+        else
+        {
+            foreach (TileContentType castle in Game.castles)
+            {
+                if (enemy.path.Contains(castle.tileContainer))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }

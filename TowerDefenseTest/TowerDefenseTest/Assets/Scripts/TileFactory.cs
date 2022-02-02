@@ -31,6 +31,9 @@ public class TileFactory : GameObjectFactory
 
     [SerializeField]
     TileContentType wall;
+
+    [SerializeField]
+    TileContentType woodenwall;
     #endregion
 
     #region Unity methods
@@ -77,6 +80,8 @@ public class TileFactory : GameObjectFactory
                 return Get(quarry);
             case TileType.Wall:
                 return Get(wall);
+            case TileType.WoodenWall:
+                return Get(woodenwall);
         }
         return null;
     }
