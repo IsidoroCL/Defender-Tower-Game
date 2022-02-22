@@ -45,7 +45,8 @@ public class StartMenu : MonoBehaviour
     private static void NewGame()
     {
         instance.SetButtonsDeactives();
-        SceneManager.LoadScene("Scenario01", LoadSceneMode.Single);
+        TransitionManager.Instance.LoadScene("Scenario01");
+        //SceneManager.LoadScene("Scenario01", LoadSceneMode.Single);
     }
 	#endregion
 	

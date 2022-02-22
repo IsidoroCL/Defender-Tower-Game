@@ -5,21 +5,26 @@ public class Bonus : MonoBehaviour
 
 	#region Fields
 	public int addMoney;
-	#endregion
+	private AudioSource audioSource;
+    #endregion
 
-	#region Unity methods
+    #region Unity methods
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+    #endregion
 
-	#endregion
+    #region Private methods
 
-	#region Private methods
+    #endregion
 
-	#endregion
-	
-	#region Public / Protected methods
-	public void Touched()
+    #region Public / Protected methods
+    public void Touched()
     {
 		Game.money += addMoney;
-		gameObject.SetActive(false);
+        AudioSource.PlayClipAtPoint(audioSource.clip, Camera.main.transform.position, 1f);
+        gameObject.SetActive(false);
     }
 	#endregion
 }

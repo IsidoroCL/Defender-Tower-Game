@@ -79,6 +79,10 @@ public class TileContentType : MonoBehaviour, IHealth
         {
             Game.castles.Add(this);
         }
+        if (type == TileType.SpawnPoint)
+        {
+            CleanPathRight(InfluenceTiles());
+        }
     }
     #endregion
 
@@ -121,11 +125,14 @@ public class TileContentType : MonoBehaviour, IHealth
 
     private void TilesInfluencedAreBuildable(HashSet<Tile> tilesInfluenced, bool boolValue)
     {
-        foreach (Tile tileInfluenced in tilesInfluenced)
+        if (gameObject.tag == "Building")
         {
-            if (tileInfluenced.Content.type == TileType.Plain)
+            foreach (Tile tileInfluenced in tilesInfluenced)
             {
-                tileInfluenced.Content.IsBuildable = boolValue;
+                if (tileInfluenced.Content.type == TileType.Plain)
+                {
+                    tileInfluenced.Content.IsBuildable = boolValue;
+                }
             }
         }
     }
@@ -141,6 +148,18 @@ public class TileContentType : MonoBehaviour, IHealth
             }
             TileContentType tileContentType = building.GetComponent<TileContentType>();
             tileContentType.Initialize();
+        }
+    }
+
+    private void CleanPathRight(HashSet<Tile> tilesNear)
+    {
+        foreach(Tile near in tilesNear)
+        {
+            if (near.x > 0 &&
+                near.Content.type != TileType.Plain)
+            {
+                near.Content = factory.GetTile(TileType.Plain);
+            }
         }
     }
     #endregion

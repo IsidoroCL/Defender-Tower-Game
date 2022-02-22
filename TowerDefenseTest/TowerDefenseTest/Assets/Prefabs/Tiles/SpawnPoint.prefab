@@ -49,7 +49,7 @@ MonoBehaviour:
   factory: {fileID: 0}
   tileContainer: {fileID: 0}
   cost: 0
-  influenceZone: 0
+  influenceZone: 2
   isWalkable: 1
   health: -1
 --- !u!1001 &6892144918267042928

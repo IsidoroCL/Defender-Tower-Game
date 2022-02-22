@@ -5,7 +5,7 @@ public class Turret : MonoBehaviour
 
     #region Fields
     protected Enemy target;
-
+    protected AudioSource audioSource;
     [SerializeField]
     protected float health;
     [SerializeField, Range(1, 10)]
@@ -21,6 +21,11 @@ public class Turret : MonoBehaviour
     #endregion
 
     #region Unity methods
+    protected void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     private void Update()
     {
         GameUpdate();

@@ -136,8 +136,6 @@ public class Game : MonoBehaviour
     private void Win()
     {
         textWin.SetActive(true);
-        textReplay.SetActive(true);
-        Time.timeScale = 0;
         ConfigurationChoose.level++;
         StartCoroutine(NextGame());
     }
@@ -174,7 +172,8 @@ public class Game : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(3);
         ConfigurationChoose.LoadNextScenario();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        TransitionManager.Instance.ReLoadScene();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     #endregion
 

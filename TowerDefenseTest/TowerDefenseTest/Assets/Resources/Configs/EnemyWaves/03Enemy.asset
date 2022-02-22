@@ -15,7 +15,7 @@ MonoBehaviour:
   waves:
   - type: 0
     numberOfEnemies: 3
-    frequencyBetweenEnemies: 0.5
+    frequencyBetweenEnemies: 5
   - type: 2
     numberOfEnemies: 1
     frequencyBetweenEnemies: 5
@@ -25,3 +25,12 @@ MonoBehaviour:
   - type: 1
     numberOfEnemies: 10
     frequencyBetweenEnemies: 1
+  - type: 6
+    numberOfEnemies: 10
+    frequencyBetweenEnemies: 1
+  - type: 1
+    numberOfEnemies: 3
+    frequencyBetweenEnemies: 3
+  - type: 2
+    numberOfEnemies: 2
+    frequencyBetweenEnemies: 2

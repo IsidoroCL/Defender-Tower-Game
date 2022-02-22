@@ -229,7 +229,7 @@ MonoBehaviour:
   cost: 50
   influenceZone: 1
   isWalkable: 0
-  health: 20
+  health: 50
 --- !u!1 &7784420582987194270
 GameObject:
   m_ObjectHideFlags: 0

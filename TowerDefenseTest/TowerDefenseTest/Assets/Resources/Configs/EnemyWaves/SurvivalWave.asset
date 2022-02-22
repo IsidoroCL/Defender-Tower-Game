@@ -15,22 +15,22 @@ MonoBehaviour:
   waves:
   - type: 0
     numberOfEnemies: 10
-    frequencyBetweenEnemies: 2
+    frequencyBetweenEnemies: 5
   - type: 1
     numberOfEnemies: 4
-    frequencyBetweenEnemies: 1
+    frequencyBetweenEnemies: 3
   - type: 2
     numberOfEnemies: 2
     frequencyBetweenEnemies: 5
   - type: 0
-    numberOfEnemies: 5
+    numberOfEnemies: 2
     frequencyBetweenEnemies: 1
   - type: 6
-    numberOfEnemies: 5
+    numberOfEnemies: 2
     frequencyBetweenEnemies: 2
   - type: 1
     numberOfEnemies: 10
-    frequencyBetweenEnemies: 0.5
+    frequencyBetweenEnemies: 1
   - type: 0
     numberOfEnemies: 5
     frequencyBetweenEnemies: 2
@@ -38,10 +38,10 @@ MonoBehaviour:
     numberOfEnemies: 3
     frequencyBetweenEnemies: 3
   - type: 4
-    numberOfEnemies: 10
+    numberOfEnemies: 5
     frequencyBetweenEnemies: 2
   - type: 1
-    numberOfEnemies: 10
+    numberOfEnemies: 5
     frequencyBetweenEnemies: 1
   - type: 0
     numberOfEnemies: 5
@@ -56,11 +56,11 @@ MonoBehaviour:
     numberOfEnemies: 5
     frequencyBetweenEnemies: 1
   - type: 0
-    numberOfEnemies: 10
-    frequencyBetweenEnemies: 0.5
+    numberOfEnemies: 5
+    frequencyBetweenEnemies: 2
   - type: 6
-    numberOfEnemies: 10
-    frequencyBetweenEnemies: 0.5
+    numberOfEnemies: 5
+    frequencyBetweenEnemies: 2
   - type: 5
     numberOfEnemies: 1
     frequencyBetweenEnemies: 3

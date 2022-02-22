@@ -12,8 +12,13 @@ public class Enemy : MonoBehaviour, IHealth
 
     public StateIA state;
     public Stack<Tile> path = new Stack<Tile>();
+    [HideInInspector]
     public Tile nextTile;
+    [HideInInspector]
     public Tile currentTile;
+
+    [SerializeField]
+    private AudioClip deathSound;
 
     private float moveProgress;
     private float timeFromLastAttack;
@@ -37,10 +42,7 @@ public class Enemy : MonoBehaviour, IHealth
     {
         if (Health < 0)
         {
-            CleanPath();
-            currentTile.NoPath();
-            factory.Reclaim(this);
-            Game.money += money;
+            Death();
         }
         state.GameUpdate(this);
         timeFromLastAttack += Time.deltaTime;
@@ -74,6 +76,15 @@ public class Enemy : MonoBehaviour, IHealth
         {
             if (path.Count > 0) nextTile = path.Pop();
         }
+    }
+
+    private void Death()
+    {
+        CleanPath();
+        currentTile.NoPath();
+        factory.Reclaim(this);
+        Game.money += money;
+        AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, 1f);
     }
     #endregion
 

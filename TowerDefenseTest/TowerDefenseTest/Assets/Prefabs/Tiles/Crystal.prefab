@@ -135,7 +135,7 @@ MonoBehaviour:
   cost: 0
   influenceZone: 3
   isWalkable: 1
-  health: 50
+  health: 100
 --- !u!114 &5062005626676575078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5407060b574174f41ab7601059b642a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frequencyBetweenBonus: 5
+  frequencyBetweenBonus: 6
 --- !u!114 &6722305867600754010
 MonoBehaviour:
   m_ObjectHideFlags: 0

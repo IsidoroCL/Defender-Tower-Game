@@ -5,9 +5,12 @@ public class TurretCannon : Turret
 
     #region Fields
     private ObjectPool pool;
+    
     #endregion
 
     #region Unity methods
+
+
     private void Start()
     {
         pool = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ObjectPool>();
@@ -34,7 +37,7 @@ public class TurretCannon : Turret
             bullet.SetActive(true);
             bullet.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
             bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
-
+            audioSource.PlayOneShot(audioSource.clip);
         }
     }
     #endregion

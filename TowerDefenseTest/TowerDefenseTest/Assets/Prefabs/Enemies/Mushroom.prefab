@@ -49,6 +49,7 @@ MonoBehaviour:
   state: {fileID: 11400000, guid: f7f32ea57141d3c49abd00fb47b34b1b, type: 2}
   nextTile: {fileID: 0}
   currentTile: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 07e20e0bfdf27a143a1115a040531dda, type: 3}
 --- !u!58 &1511615700519373175
 CircleCollider2D:
   m_ObjectHideFlags: 0

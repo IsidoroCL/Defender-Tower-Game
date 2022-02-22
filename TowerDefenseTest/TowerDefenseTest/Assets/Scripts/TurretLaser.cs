@@ -12,6 +12,7 @@ public class TurretLaser : Turret
     #region Unity methods
     private void Awake()
     {
+        base.Awake();
         laser = GetComponent<LineRenderer>();
     }
 
@@ -49,6 +50,7 @@ public class TurretLaser : Turret
         laser.enabled = true;
         laser.SetPosition(1, target.transform.localPosition + Vector3.back * 3);
         target.Health -= damage;
+        audioSource.PlayOneShot(audioSource.clip);
     }
     #endregion
 }
