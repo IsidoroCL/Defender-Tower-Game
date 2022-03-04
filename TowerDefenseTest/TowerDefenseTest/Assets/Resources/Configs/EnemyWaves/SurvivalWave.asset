@@ -88,3 +88,33 @@ MonoBehaviour:
   - type: 3
     numberOfEnemies: 100
     frequencyBetweenEnemies: 1
+  - type: 2
+    numberOfEnemies: 10
+    frequencyBetweenEnemies: 0.5
+  - type: 4
+    numberOfEnemies: 10
+    frequencyBetweenEnemies: 0.5
+  - type: 1
+    numberOfEnemies: 50
+    frequencyBetweenEnemies: 0.5
+  - type: 5
+    numberOfEnemies: 50
+    frequencyBetweenEnemies: 0.5
+  - type: 3
+    numberOfEnemies: 100
+    frequencyBetweenEnemies: 0.5
+  - type: 5
+    numberOfEnemies: 100
+    frequencyBetweenEnemies: 0.5
+  - type: 6
+    numberOfEnemies: 100
+    frequencyBetweenEnemies: 0.5
+  - type: 1
+    numberOfEnemies: 100
+    frequencyBetweenEnemies: 0.5
+  - type: 2
+    numberOfEnemies: 100
+    frequencyBetweenEnemies: 0.5
+  - type: 3
+    numberOfEnemies: 100
+    frequencyBetweenEnemies: 0.5

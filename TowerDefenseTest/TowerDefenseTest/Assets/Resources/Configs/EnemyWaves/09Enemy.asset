@@ -10,33 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd108c530ba48b34dbd0f389f3102078, type: 3}
-  m_Name: 02Enemy
+  m_Name: 09Enemy
   m_EditorClassIdentifier: 
   waves:
-  - type: 1
+  - type: 0
     numberOfEnemies: 1
     frequencyBetweenEnemies: 5
-  - type: 1
-    numberOfEnemies: 4
-    frequencyBetweenEnemies: 2
   - type: 0
+    numberOfEnemies: 4
+    frequencyBetweenEnemies: 1
+  - type: 4
+    numberOfEnemies: 10
+    frequencyBetweenEnemies: 1
+  - type: 1
+    numberOfEnemies: 10
+    frequencyBetweenEnemies: 0.5
+  - type: 4
+    numberOfEnemies: 10
+    frequencyBetweenEnemies: 0.5
+  - type: 6
     numberOfEnemies: 5
     frequencyBetweenEnemies: 2
-  - type: 6
-    numberOfEnemies: 2
-    frequencyBetweenEnemies: 3
-  - type: 2
-    numberOfEnemies: 1
-    frequencyBetweenEnemies: 2
-  - type: 0
-    numberOfEnemies: 10
-    frequencyBetweenEnemies: 2
-  - type: 6
-    numberOfEnemies: 2
-    frequencyBetweenEnemies: 5
-  - type: 0
-    numberOfEnemies: 10
-    frequencyBetweenEnemies: 2
-  - type: 2
+  - type: 4
+    numberOfEnemies: 5
+    frequencyBetweenEnemies: 1
+  - type: 5
     numberOfEnemies: 2
     frequencyBetweenEnemies: 2
+  - type: 4
+    numberOfEnemies: 30
+    frequencyBetweenEnemies: 1
+  - type: 5
+    numberOfEnemies: 5
+    frequencyBetweenEnemies: 1
